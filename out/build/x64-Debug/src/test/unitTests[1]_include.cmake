@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/darkz/Desktop/TSP/Year 2/C++/JeuDeLaNature-Thibault-Yassin/out/build/x64-Debug/src/test/unitTests[1]_tests.cmake")
+  include("C:/Users/darkz/Desktop/TSP/Year 2/C++/JeuDeLaNature-Thibault-Yassin/out/build/x64-Debug/src/test/unitTests[1]_tests.cmake")
+else()
+  add_test(unitTests_NOT_BUILT unitTests_NOT_BUILT)
+endif()
