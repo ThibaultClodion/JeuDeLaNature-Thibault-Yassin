@@ -32,6 +32,20 @@ void Map::Draw(sf::RenderWindow& window) const
   }
 }
 
+Cell* Map::GetCell(int x, int y) const 
+{
+  if (x < 0 || x >= NB_CELL_ROW || y < 0 || y >= NB_CELL_COLUMN) return nullptr;
+
+  return grid[x][y].get();
+}
+
+void Map::SetCell(int x, int y, std::unique_ptr<Cell> cell) 
+{
+  if (x < 0 || x >= NB_CELL_ROW || y < 0 || y >= NB_CELL_COLUMN) return;
+
+  grid[x][y] = std::move(cell);
+}
+
 void Map::RandomizeGridCenter(int randomSize) 
 {
   int centerX = NB_CELL_ROW / 2;
