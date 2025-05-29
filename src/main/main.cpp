@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Circle.h"
+#include "Param.h"
 
 int main() 
 {
@@ -8,7 +9,7 @@ int main()
   Circle* circle = new Circle();
   circle->Test();
 
-  sf::RenderWindow window{sf::VideoMode({800, 800}), "Jeu De La Nature"};
+  sf::RenderWindow window{sf::VideoMode({WINDOW_HEIGHT, WINDOW_WIDTH}),"Jeu De La Nature"};
   window.setFramerateLimit(30);
 
   // run the program as long as the window is open
