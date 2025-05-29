@@ -1,22 +1,22 @@
 #include <SFML/Graphics.hpp>
 
-#include "Circle.h"
 #include "Param.h"
+#include "Map.h"
 
 int main() 
 {
-  // Test the Circle class
-  Circle* circle = new Circle();
-  circle->Test();
+  //Create the map
+  Map map{true};
 
+  // Create the main window
   sf::RenderWindow window{sf::VideoMode({WINDOW_HEIGHT, WINDOW_WIDTH}),"Jeu De La Nature"};
   window.setFramerateLimit(30);
 
   // run the program as long as the window is open
-  while (window.isOpen()) {
-    // check all the window's events that were triggered since the last
-    // iteration of the loop
-    while (const std::optional event = window.pollEvent()) {
+  while (window.isOpen()) 
+  {
+    while (const std::optional event = window.pollEvent()) 
+    {
       // "close requested" event: we close the window
       if (event->is<sf::Event::Closed>()) window.close();
 
@@ -32,6 +32,9 @@ int main()
     sf::RectangleShape background(sf::Vector2f(1600.f, 1600.f));
     background.setFillColor(sf::Color::White);
     window.draw(background);
+
+    // Draw the map
+    map.Draw(window);
 
     window.display();
   }
