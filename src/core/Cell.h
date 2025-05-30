@@ -17,8 +17,9 @@ public:
   virtual sf::Color GetColor() const = 0;
   virtual CellType GetType() const = 0;
   void Draw(sf::RenderWindow& window);
+  virtual std::unique_ptr<Cell> nextGeneration(class Map& map) = 0;
 
-private:
+protected:
   int x;
   int y;
 

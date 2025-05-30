@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include <iostream> // For temporary std::cout
 
 #include "Param.h"
 #include "Map.h"
 
+
 int main() 
 {
-  //Create the map
   Map map{true};
 
   // Create the main window
@@ -37,6 +38,11 @@ int main()
     map.Draw(window);
 
     window.display();
+    
+    // Sleep for 5s and log next generation
+    sf::sleep(sf::seconds(5));
+    std::cout << "Next generation..." << std::endl;
+    map.NextGeneration();
   }
 
   return 0;

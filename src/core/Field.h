@@ -10,4 +10,5 @@ public:
   sf::Color GetColor() const override { return sf::Color::Yellow; };
   CellType GetType() const override { return CellType::CT_Field; };
 
+  std::unique_ptr<Cell> nextGeneration(Map& map) override;
 };
