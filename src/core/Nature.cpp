@@ -7,9 +7,20 @@ std::unique_ptr<Cell> Nature::nextGeneration(Map& map) {
   int nbHome = map.CountNeighbors(x, y, CT_Home);
   int nbField = map.CountNeighbors(x, y, CT_Field);
 
-  if (nbField >= 2) return std::make_unique<Field>(x, y);
+  if (nbField + nbHome >= 3) 
+  {
+    // Randomly choose the less frequent neighbor type
+    int randomGeneration = rand() % (nbHome + nbField);
 
-  if (nbHome >= 2 && nbField >= 1) return std::make_unique<Home>(x, y);
+    if (randomGeneration < nbHome) 
+    {
+      return std::make_unique<Field>(x, y);
+    } 
+    else 
+    {
+      return std::make_unique<Home>(x, y);
+    }
+  }
 
   return std::make_unique<Nature>(x, y);
 }

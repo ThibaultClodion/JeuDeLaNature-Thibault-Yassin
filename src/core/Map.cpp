@@ -90,25 +90,30 @@ void Map::RandomizeGridCenter(int randomSize)
   int centerX = NB_CELL_ROW / 2;
   int centerY = NB_CELL_COLUMN / 2;
 
-  for (int i = centerX - randomSize; i <= centerX + randomSize; ++i) 
+  int nbNonNatureCells = 0;
+  int nbCellsToFill = 5 + rand() % 4;  // Between 5 and 8 non-nature cells
+
+  // Generate random cells
+  while (nbNonNatureCells < nbCellsToFill)
   {
-    for (int j = centerY - randomSize; j <= centerY + randomSize; ++j) 
+    int randomX = centerX + (rand() % (randomSize * 2 + 1)) - randomSize;
+    int randomY = centerY + (rand() % (randomSize * 2 + 1)) - randomSize;
+
+    
+    if (grid[randomX][randomY]->GetType() == CT_Nature) 
     {
-      if (i >= 0 && i < NB_CELL_ROW && j >= 0 && j < NB_CELL_COLUMN) 
+      int randomValue = rand() % 2;
+
+      if (randomValue == 0) 
       {
-        // TODO : Use a better randomization method (to balance the game)
-
-        int randomValue = rand() % 3;
-
-        if (randomValue == 0)
-          grid[i][j] = std::make_unique<Nature>(i, j);
-
-        else if (randomValue == 1)
-        grid[i][j] = std::make_unique<Field>(i, j);
-
-        else if (randomValue == 2)
-          grid[i][j] = std::make_unique<Home>(i, j);
+        grid[randomX][randomY] = std::make_unique<Home>(randomX, randomY);
+      } 
+      else 
+      {
+        grid[randomX][randomY] = std::make_unique<Field>(randomX, randomY);
       }
+
+      ++nbNonNatureCells;
     }
   }
 }

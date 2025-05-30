@@ -1,13 +1,13 @@
 #include "Field.h"
-#include "Home.h"
 #include "Nature.h"
 #include "Map.h"
 
 std::unique_ptr<Cell> Field::nextGeneration(Map& map) 
 {
-  int nbHome = map.CountNeighbors(x, y, CT_Home);
+  int nbNature = map.CountNeighbors(x, y, CT_Nature);
 
-  if (nbHome >= 3) return std::make_unique<Home>(x, y);
+  // Field returns to nature if isolated
+  if (nbNature == 8) return std::make_unique<Nature>(x, y);
 
   return std::make_unique<Field>(x, y);
 }

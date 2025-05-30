@@ -1,12 +1,12 @@
 #include "Home.h"
-#include "Field.h"
-#include "Map.h"
 #include "Nature.h"
+#include "Map.h"
 
 std::unique_ptr<Cell> Home::nextGeneration(Map& map) {
-  int nbHome = map.CountNeighbors(x, y, CT_Home);
+  int nbNature = map.CountNeighbors(x, y, CT_Nature);
 
-  if (nbHome == 0) return std::make_unique<Nature>(x, y);
+  // House return to nature if isolated
+  if (nbNature == 8) return std::make_unique<Nature>(x, y);
 
   return std::make_unique<Home>(x, y);
 }
