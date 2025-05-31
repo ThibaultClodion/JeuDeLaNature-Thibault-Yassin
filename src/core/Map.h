@@ -9,6 +9,7 @@ class Map
 {
 
 public:
+  Map() = default;
   Map(int randomizeCenterSize);
   void Draw(sf::RenderWindow& window) const;
 

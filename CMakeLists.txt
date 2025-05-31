@@ -44,5 +44,6 @@ include(GoogleTest)
 
 # Sous-dossiers
 add_subdirectory(src/core)
+add_subdirectory(src/game)
 add_subdirectory(src/main)
 add_subdirectory(src/test)
