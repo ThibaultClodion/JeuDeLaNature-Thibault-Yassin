@@ -8,7 +8,7 @@
 
 TEST(TestNotRandomGeneration, TestInitialization) 
 { 
-  Map map{false};
+  Map map{0};
 
   for (int i = 0; i < NB_CELL_ROW; ++i) {
     for (int j = 0; j < NB_CELL_COLUMN; ++j) {
@@ -20,7 +20,7 @@ TEST(TestNotRandomGeneration, TestInitialization)
 
 TEST(TestSetCells, TestInitialization) 
 {
-  Map map{false};
+  Map map{0};
 
   // Set a cell to Field
   map.SetCell(0, 0, std::make_unique<Field>(0, 0));
@@ -38,9 +38,25 @@ TEST(TestSetCells, TestInitialization)
   EXPECT_EQ(cell->GetType(), CellType::CT_Nature);
 }
 
+TEST(TestNbNonNatureCells, TestInitialization) {
+  Map map{1};
+
+  int nonNatureCount = 0;
+  for (int i = 0; i < NB_CELL_ROW; ++i) {
+    for (int j = 0; j < NB_CELL_COLUMN; ++j) {
+      Cell* cell = map.GetCell(i, j);
+      if (cell->GetType() != CellType::CT_Nature) {
+        ++nonNatureCount;
+      }
+    }
+  }
+
+  EXPECT_TRUE(nonNatureCount > MIN_NON_NATURE && nonNatureCount < (2 * RANDOM_EXTENSION_SIZE + 1) ^ 2);
+}
+
 TEST(TestOnlyNature, TestNextGeneration)
 {
-  Map map{false};
+  Map map{0};
 
   map.NextGeneration();
 
@@ -54,7 +70,7 @@ TEST(TestOnlyNature, TestNextGeneration)
 
 TEST(TestStayNature, TestNextGeneration) 
 {
-  Map map{false};
+  Map map{0};
 
   map.SetCell(0, 1, std::make_unique<Field>(0, 1));
   map.SetCell(1, 0, std::make_unique<Home>(1, 0));
@@ -64,7 +80,7 @@ TEST(TestStayNature, TestNextGeneration)
 }
 
 TEST(TestChangeToFieldOrHome, TestNextGeneration) {
-  Map map{false};
+  Map map{0};
 
   map.SetCell(0, 1, std::make_unique<Field>(0, 1));
   map.SetCell(1, 0, std::make_unique<Home>(1, 0));
@@ -78,7 +94,7 @@ TEST(TestChangeToFieldOrHome, TestNextGeneration) {
 
 TEST(TestHomeAlone, TestNextGeneration) 
 {
-  Map map{false};
+  Map map{0};
 
   map.SetCell(1, 1, std::make_unique<Home>(1, 1));
   map.NextGeneration();
@@ -87,7 +103,7 @@ TEST(TestHomeAlone, TestNextGeneration)
 }
 
 TEST(TestFieldAlone, TestNextGeneration) {
-  Map map{false};
+  Map map{0};
 
   map.SetCell(1, 1, std::make_unique<Field>(1, 1));
   map.NextGeneration();

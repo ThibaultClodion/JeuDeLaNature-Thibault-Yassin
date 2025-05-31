@@ -7,7 +7,7 @@
 
 int main() 
 {
-  Map map{true};
+  Map map{1};
 
   // Create the main window
   sf::RenderWindow window{sf::VideoMode({WINDOW_HEIGHT, WINDOW_WIDTH}),"Jeu De La Nature"};

@@ -9,7 +9,7 @@ class Map
 {
 
 public:
-  Map(bool isRandom);
+  Map(int randomizeCenterSize);
   void Draw(sf::RenderWindow& window) const;
 
   // Functions for UnitTests

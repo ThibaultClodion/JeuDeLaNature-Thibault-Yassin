@@ -7,7 +7,7 @@
 #include "Field.h"
 #include "Home.h"
 
-Map::Map(bool isRandom) 
+Map::Map(int randomizeCenterSize) 
 {
   grid.resize(NB_CELL_ROW);
 
@@ -21,12 +21,12 @@ Map::Map(bool isRandom)
     }
   }
 
-  if (isRandom) 
+  if (randomizeCenterSize) 
   {
     // Randomize seed
     // TODO : add posibility to choose seed to replay the same randomization
     srand(time(nullptr));
-    RandomizeGridCenter(1);
+    RandomizeGridCenter(RANDOM_EXTENSION_SIZE);
   }
 }
 
@@ -90,8 +90,9 @@ void Map::RandomizeGridCenter(int randomSize)
   int centerX = NB_CELL_ROW / 2;
   int centerY = NB_CELL_COLUMN / 2;
 
+  // Ensure at least MIN_NON_NATURE cells are filled ant not more than the maximum possible cells
+  int nbCellsToFill = MIN_NON_NATURE + rand() % ((2 * randomSize + 1) ^ 2 - MIN_NON_NATURE);
   int nbNonNatureCells = 0;
-  int nbCellsToFill = 5 + rand() % 4;  // Between 5 and 8 non-nature cells
 
   // Generate random cells
   while (nbNonNatureCells < nbCellsToFill)
