@@ -17,6 +17,21 @@ FetchContent_Declare(sfml
 )
 FetchContent_MakeAvailable(sfml)
 
+# ImGui and ImGui-SFML
+FetchContent_Declare( imgui
+  URL https://github.com/ocornut/imgui/archive/refs/tags/v1.91.9.tar.gz
+)
+FetchContent_MakeAvailable(imgui)
+
+FetchContent_Declare( imgui-sfml
+  URL https://github.com/SFML/imgui-sfml/archive/refs/tags/v3.0.tar.gz
+)
+
+set(IMGUI_DIR ${imgui_SOURCE_DIR})
+option(IMGUI_SFML_FIND_SFML "Use find_package to find SFML" OFF)
+option(IMGUI_SFML_IMGUI_DEMO "Build imgui_demo.cpp" OFF)
+FetchContent_MakeAvailable(imgui-sfml)
+
 # GoogleTest
 FetchContent_Declare(googletest
   URL https://github.com/google/googletest/archive/refs/tags/v1.16.0.tar.gz

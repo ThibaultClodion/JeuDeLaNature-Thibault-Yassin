@@ -2,7 +2,8 @@ add_executable(main
     main.cpp
 )
 
-target_link_libraries(main PUBLIC lib_core sfml-graphics)
+target_link_libraries(main PUBLIC lib_core sfml-graphics ImGui-SFML::ImGui-SFML)
+target_compile_options(main PRIVATE ${IMGUI_SFML_WARNINGS})
 
 # Copy resources
 file(GLOB RESOURCES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/resources/*.*)
