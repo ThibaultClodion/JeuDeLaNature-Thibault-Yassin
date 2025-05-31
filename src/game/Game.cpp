@@ -5,7 +5,7 @@
 Game::Game() 
 {
   // Create the main window
-  window = sf::RenderWindow{sf::VideoMode({WINDOW_HEIGHT, WINDOW_WIDTH}),
+  window = sf::RenderWindow{sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}),
                           "Jeu De La Nature"};
   window.setFramerateLimit(30);
 

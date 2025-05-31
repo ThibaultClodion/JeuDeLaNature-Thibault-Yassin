@@ -13,7 +13,7 @@ UIManager::UIManager(sf::RenderWindow& window)
   }
 
   // Define background
-  background = sf::RectangleShape(sf::Vector2f(WINDOW_HEIGHT, WINDOW_WIDTH));
+  background = sf::RectangleShape(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
   background.setFillColor(sf::Color::White);
 }
 
@@ -29,11 +29,8 @@ void UIManager::Update(sf::RenderWindow& window)
 
   // Update UI
   ImGui::SFML::Update(window, deltaClock.restart());
-  ImGui::Begin("Hello, world!");
-  if (ImGui::Button("Next Generation")) 
-  {
-    std::cout << "Next Generation button clicked!" << std::endl;
-  }
+  UpdateRoundWindow();
+
   ImGui::End();
 }
 
@@ -45,4 +42,24 @@ void UIManager::Render(sf::RenderWindow& window)
 void UIManager::Shutdown()
 {
   ImGui::SFML::Shutdown();
+}
+
+void UIManager::UpdateRoundWindow() 
+{
+  ImGui::SetNextWindowPos(GetWindowPos());
+  ImGui::SetNextWindowSize(GetWindowSize(3));
+  ImGui::Begin("Round");
+
+  ImGui::SetCursorPos(GetButtonPos(0));
+  if (ImGui::Button("Next Generation", ImVec2(ButtonWidth, ButtonHeight))) {
+    std::cout << "Next Generation button clicked!" << std::endl;
+  }
+  ImGui::SetCursorPos(GetButtonPos(1));
+  if (ImGui::Button("Next Generation 2", ImVec2(ButtonWidth, ButtonHeight))) {
+    std::cout << "Next Generation button clicked!" << std::endl;
+  }
+  ImGui::SetCursorPos(GetButtonPos(2));
+  if (ImGui::Button("Next Generation 3", ImVec2(ButtonWidth, ButtonHeight))) {
+    std::cout << "Next Generation button clicked!" << std::endl;
+  }
 }
