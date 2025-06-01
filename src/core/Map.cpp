@@ -53,6 +53,22 @@ void Map::SetCell(int x, int y, std::unique_ptr<Cell> cell)
   grid[x][y] = std::move(cell);
 }
 
+int Map::GetNbNatureCell() const 
+{ 
+  // TODO : make a variable to store the number of nature cells and update it
+  // when a cell is changed (better performance)
+
+  int count = 0;
+  for (const auto& row : grid) {
+    for (const auto& cell : row) {
+      if (cell->GetType() == CT_Nature) {
+        ++count;
+      }
+    }
+  }
+  return count;
+}
+
 void Map::NextGeneration() 
 {
   std::vector<std::vector<std::unique_ptr<Cell>>> newGrid(NB_CELL_ROW);
@@ -63,7 +79,9 @@ void Map::NextGeneration()
       newGrid[i][j] = grid[i][j]->nextGeneration(*this);
     }
   }
+
   grid = std::move(newGrid);
+  ++round;
 }
 
 int Map::CountNeighbors(int x, int y, CellType Type) 

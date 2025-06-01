@@ -22,16 +22,15 @@ void UIManager::ProcessEvent(sf::RenderWindow& window, const sf::Event& event)
   ImGui::SFML::ProcessEvent(window, event);
 }
 
-void UIManager::Update(sf::RenderWindow& window) 
+void UIManager::Update(sf::RenderWindow& window, Map& map) 
 {
   //Draw background
   window.draw(background);
 
   // Update UI
   ImGui::SFML::Update(window, deltaClock.restart());
-  UpdateRoundWindow();
-
-  ImGui::End();
+  UpdateRoundWindow(map);
+  UpdatePowerWindow();
 }
 
 void UIManager::Render(sf::RenderWindow& window) 
@@ -44,22 +43,54 @@ void UIManager::Shutdown()
   ImGui::SFML::Shutdown();
 }
 
-void UIManager::UpdateRoundWindow() 
+void UIManager::UpdateRoundWindow(Map& map) 
 {
   ImGui::SetNextWindowPos(GetWindowPos());
   ImGui::SetNextWindowSize(GetWindowSize(3));
   ImGui::Begin("Round");
 
   ImGui::SetCursorPos(GetButtonPos(0));
-  if (ImGui::Button("Next Generation", ImVec2(ButtonWidth, ButtonHeight))) {
-    std::cout << "Next Generation button clicked!" << std::endl;
-  }
+  ImGui::Text("Round: %d", map.GetRound());
   ImGui::SetCursorPos(GetButtonPos(1));
-  if (ImGui::Button("Next Generation 2", ImVec2(ButtonWidth, ButtonHeight))) {
-    std::cout << "Next Generation button clicked!" << std::endl;
-  }
+  ImGui::Text("Nature Cells: %d", map.GetNbNatureCell());
+
   ImGui::SetCursorPos(GetButtonPos(2));
-  if (ImGui::Button("Next Generation 3", ImVec2(ButtonWidth, ButtonHeight))) {
-    std::cout << "Next Generation button clicked!" << std::endl;
+  if (ImGui::Button("Next Generation", ImVec2(ButtonWidth, ButtonHeight))) {
+    map.NextGeneration();
   }
+
+  if (ImGui::IsItemHovered()) {
+    ImGui::SetTooltip("Pass the round and make the next generation happen");
+  }
+
+  ImGui::End();
+}
+
+void UIManager::UpdatePowerWindow() 
+{
+  ImGui::SetNextWindowPos(ImVec2(GetWindowPos().x, GetButtonPos(3).y + 10));
+  ImGui::SetNextWindowSize(GetWindowSize(3));
+  ImGui::Begin("Power");
+
+  // Power 1
+  ImGui::SetCursorPos(GetButtonPos(0));
+  if (ImGui::Button("Power 1", ImVec2(ButtonWidth, ButtonHeight))) {
+    std::cout << "Power 1 activated" << std::endl;  // Temporary debug output
+  }
+
+  if (ImGui::IsItemHovered()) {
+    ImGui::SetTooltip("This power 1 ...");
+  }
+
+  // Power 2
+  ImGui::SetCursorPos(GetButtonPos(1));
+  if (ImGui::Button("Power 2", ImVec2(ButtonWidth, ButtonHeight))) {
+    std::cout << "Power 2 activated" << std::endl;  // Temporary debug output
+  }
+
+  if (ImGui::IsItemHovered()) {
+    ImGui::SetTooltip("This power 2 ...");
+  }
+
+  ImGui::End();
 }

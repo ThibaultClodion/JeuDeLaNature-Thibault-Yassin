@@ -4,6 +4,7 @@
 #include <imgui.h>
 
 #include "Param.h"
+#include "Map.h"
 
 class UIManager 
 {
@@ -12,12 +13,13 @@ class UIManager
   UIManager(sf::RenderWindow& window);
 
   void ProcessEvent(sf::RenderWindow& window, const sf::Event& event);
-  void Update(sf::RenderWindow& window);
+  void Update(sf::RenderWindow& window, Map& map);
   void Render(sf::RenderWindow& window);
   void Shutdown();
 
 private:
-  void UpdateRoundWindow();
+  void UpdateRoundWindow(Map& map);
+  void UpdatePowerWindow();
   
   sf::Clock deltaClock;
   sf::RectangleShape background;

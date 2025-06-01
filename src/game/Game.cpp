@@ -38,7 +38,7 @@ void Game::Run()
     window.clear();
 
     // Draw the background and the ui
-    uiManager.Update(window);
+    uiManager.Update(window, map);
     map.Draw(window);
     uiManager.Render(window);
 

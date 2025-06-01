@@ -12,16 +12,19 @@ public:
   Map() = default;
   Map(int randomizeCenterSize);
   void Draw(sf::RenderWindow& window) const;
-
-  // Functions for UnitTests
-  Cell* GetCell(int x, int y) const;
-  void SetCell(int x, int y, std::unique_ptr<Cell> cell);
-
+  
   void NextGeneration();
   int CountNeighbors(int x, int y, CellType Type);
+
+  // Getters and setters
+  Cell* GetCell(int x, int y) const;
+  void SetCell(int x, int y, std::unique_ptr<Cell> cell);
+  int GetRound() const { return round; }
+  int GetNbNatureCell() const;
 
 private:
   void RandomizeGridCenter(int randomSize);
 
   std::vector<std::vector<std::unique_ptr<Cell>>> grid;
+  int round = 0;
 };
