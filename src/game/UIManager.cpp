@@ -76,21 +76,24 @@ void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager)
   // Freeze Power
   ImGui::SetCursorPos(GetButtonPos(0));
   if (ImGui::Button("Freeze", ImVec2(ButtonWidth, ButtonHeight))) {
-    powerManager.SetFreezePower();
+    powerManager.SetPower(0);
   }
 
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip("Freeze one cell so that it will never change again \nCooldown : 1 round");
+    ImGui::SetTooltip("Freeze one cell so that it will never change again \n\nRemaining round to re-use : %d", 
+      powerManager.GetPowerCooldown(0));
   }
 
   // Power 2
   ImGui::SetCursorPos(GetButtonPos(1));
-  if (ImGui::Button("Power 2", ImVec2(ButtonWidth, ButtonHeight))) {
-    std::cout << "Power 2 activated" << std::endl;  // Temporary debug output
+  if (ImGui::Button("Naturalize", ImVec2(ButtonWidth, ButtonHeight))) {
+    powerManager.SetPower(1);
   }
 
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip("This power 2 ...");
+    ImGui::SetTooltip(
+        "Make the cell nature again \n\nRemaining round to re-use : %d",
+        powerManager.GetPowerCooldown(1));
   }
 
   ImGui::End();

@@ -10,7 +10,8 @@ public:
   void UseCurrentPower(Map& map, int x, int y);
   void UpdateCooldown();
 
-  void SetFreezePower() { currentPower = 0; }
+  void SetPower(int i) { currentPower = i; };
+  int GetPowerCooldown(int i) { return powers[i]->GetCooldown();}
 
 private:
  int currentPower = -1;

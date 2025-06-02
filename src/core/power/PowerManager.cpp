@@ -1,9 +1,11 @@
 #include "PowerManager.h"
 #include "Freeze.h"
+#include "Naturalize.h"
 
 PowerManager::PowerManager() 
 { 
-  powers.push_back(std::make_unique<Freeze>()); 
+  powers.push_back(std::make_unique<Freeze>());
+  powers.push_back(std::make_unique<Naturalize>());
 }
 
 void PowerManager::UseCurrentPower(Map& map, int x, int y) 
