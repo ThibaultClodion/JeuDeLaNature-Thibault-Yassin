@@ -8,7 +8,7 @@ constexpr int NB_CELL_ROW = 19;
 constexpr int NB_CELL_COLUMN = 19;
 
 // Dimensions de la fenêtre
-constexpr int WINDOW_WIDTH_PADING = 300;  // Espace pour l'UI
+constexpr int WINDOW_WIDTH_PADING = 400;  // Espace pour l'UI
 constexpr int WINDOW_WIDTH = CELL_SIZE * NB_CELL_COLUMN + WINDOW_WIDTH_PADING;
 constexpr int WINDOW_HEIGHT = CELL_SIZE * NB_CELL_ROW;
 

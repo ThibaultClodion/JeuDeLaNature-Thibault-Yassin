@@ -31,6 +31,7 @@ void UIManager::Update(sf::RenderWindow& window, Map& map, PowerManager& powerMa
   ImGui::SFML::Update(window, deltaClock.restart());
   UpdateRoundWindow(map, powerManager);
   UpdatePowerWindow(map, powerManager);
+  UpdateIndicationWindow();
 }
 
 void UIManager::Render(sf::RenderWindow& window) 
@@ -70,7 +71,7 @@ void UIManager::UpdateRoundWindow(Map& map, PowerManager& powerManager)
 void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager) 
 {
   ImGui::SetNextWindowPos(ImVec2(GetWindowPos().x, GetButtonPos(3).y + 10));
-  ImGui::SetNextWindowSize(GetWindowSize(4));
+  ImGui::SetNextWindowSize(GetWindowSize(6));
   ImGui::Begin("Power");
 
   // Freeze Power
@@ -121,6 +122,25 @@ void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager)
         "\n\nRemaining round to re-use : % d",
         powerManager.GetPowerCooldown(3));
   }
+
+  ImGui::End();
+}
+
+void UIManager::UpdateIndicationWindow()
+{
+  ImGui::SetNextWindowPos(ImVec2(GetWindowPos().x, GetButtonPos(10).y + 10));
+  ImGui::SetNextWindowSize(GetWindowSize(2));
+
+  ImGui::Begin("Indication");
+
+  ImGui::SetCursorPos(GetButtonPos(0));
+  ImGui::Text("Rule 1 : A nature cell transforms into a field or\n"
+    "home if surrounded by at least three occupied cells, \n"
+    "favoring the less common type among its neighbors.\n"
+    "There is a small chance it remains nature");
+
+  ImGui::SetCursorPos(GetButtonPos(1));
+  ImGui::Text("\nRule 2 : Isolated fields and homes are destroyed");
 
   ImGui::End();
 }

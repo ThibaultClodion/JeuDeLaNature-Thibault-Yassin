@@ -21,6 +21,7 @@ class UIManager
 private:
   void UpdateRoundWindow(Map& map, PowerManager& powerManager);
   void UpdatePowerWindow(Map& map, PowerManager& powerManager);
+  void UpdateIndicationWindow();
   
   sf::Clock deltaClock;
   sf::RectangleShape background;
