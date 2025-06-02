@@ -19,7 +19,7 @@ class UIManager
   void Shutdown();
 
 private:
-  void UpdateRoundWindow(Map& map);
+  void UpdateRoundWindow(Map& map, PowerManager& powerManager);
   void UpdatePowerWindow(Map& map, PowerManager& powerManager);
   
   sf::Clock deltaClock;

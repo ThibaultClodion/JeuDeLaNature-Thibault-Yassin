@@ -6,8 +6,17 @@ class Power
 {
  public:
   Power() = default;
-  virtual ~Power() = default;
 
-  // Virtual methods for power actions
-  virtual void Activate(Map& map, int x, int y) = 0;
+  virtual void Activate(Map& map, int x, int y) { cooldown = maxCooldown; };
+
+  void UpdateCooldown() {
+    if (cooldown > 0) {
+      --cooldown;}
+  }
+
+  int GetCooldown() const { return cooldown; }
+
+protected:
+  int cooldown = 0;
+  int maxCooldown = 1;
 };

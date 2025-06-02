@@ -19,8 +19,11 @@ public:
   void Draw(sf::RenderWindow& window);
   virtual std::unique_ptr<Cell> nextGeneration(class Map& map) = 0;
 
+  void Freeze() { isFrozen = true; }
+
 protected:
   int x;
   int y;
+  bool isFrozen = false;
 
 };

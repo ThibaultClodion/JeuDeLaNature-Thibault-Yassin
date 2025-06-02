@@ -4,6 +4,8 @@
 
 std::unique_ptr<Cell> Field::nextGeneration(Map& map) 
 {
+  if (isFrozen) return std::make_unique<Field>(x, y);
+
   int nbNature = map.CountNeighbors(x, y, CT_Nature);
 
   // Field returns to nature if isolated

@@ -42,8 +42,8 @@ void Game::Run()
           sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
 
           // Convert world position to cell coordinates
-          int cellX = static_cast<int>(worldPos.y) / CELL_SIZE;
-          int cellY = static_cast<int>(worldPos.x) / CELL_SIZE;
+          int cellX = static_cast<int>(worldPos.x) / CELL_SIZE;
+          int cellY = static_cast<int>(worldPos.y) / CELL_SIZE;
 
           // Click inside the map
           if (cellX >= 0 && cellX < NB_CELL_ROW && cellY >= 0 &&

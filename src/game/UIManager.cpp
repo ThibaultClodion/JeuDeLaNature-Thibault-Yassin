@@ -29,7 +29,7 @@ void UIManager::Update(sf::RenderWindow& window, Map& map, PowerManager& powerMa
 
   // Update UI
   ImGui::SFML::Update(window, deltaClock.restart());
-  UpdateRoundWindow(map);
+  UpdateRoundWindow(map, powerManager);
   UpdatePowerWindow(map, powerManager);
 }
 
@@ -43,7 +43,7 @@ void UIManager::Shutdown()
   ImGui::SFML::Shutdown();
 }
 
-void UIManager::UpdateRoundWindow(Map& map) 
+void UIManager::UpdateRoundWindow(Map& map, PowerManager& powerManager) 
 {
   ImGui::SetNextWindowPos(GetWindowPos());
   ImGui::SetNextWindowSize(GetWindowSize(3));
@@ -57,6 +57,7 @@ void UIManager::UpdateRoundWindow(Map& map)
   ImGui::SetCursorPos(GetButtonPos(2));
   if (ImGui::Button("Next Generation", ImVec2(ButtonWidth, ButtonHeight))) {
     map.NextGeneration();
+    powerManager.UpdateCooldown();
   }
 
   if (ImGui::IsItemHovered()) {
@@ -79,7 +80,7 @@ void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager)
   }
 
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip("Freeze one cell so that it will never change again");
+    ImGui::SetTooltip("Freeze one cell so that it will never change again \nCooldown : 1 round");
   }
 
   // Power 2

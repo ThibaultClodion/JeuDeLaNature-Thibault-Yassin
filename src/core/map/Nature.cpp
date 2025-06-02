@@ -4,6 +4,9 @@
 #include "Map.h"
 
 std::unique_ptr<Cell> Nature::nextGeneration(Map& map) {
+
+  if (isFrozen) return std::make_unique<Nature>(x, y);
+
   int nbHome = map.CountNeighbors(x, y, CT_Home);
   int nbField = map.CountNeighbors(x, y, CT_Field);
 

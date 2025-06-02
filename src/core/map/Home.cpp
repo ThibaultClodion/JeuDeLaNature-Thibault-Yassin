@@ -2,7 +2,10 @@
 #include "Nature.h"
 #include "Map.h"
 
-std::unique_ptr<Cell> Home::nextGeneration(Map& map) {
+std::unique_ptr<Cell> Home::nextGeneration(Map& map) 
+{
+  if (isFrozen) return std::make_unique<Home>(x, y);
+
   int nbNature = map.CountNeighbors(x, y, CT_Nature);
 
   // House return to nature if isolated
