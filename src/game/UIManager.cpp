@@ -22,7 +22,7 @@ void UIManager::ProcessEvent(sf::RenderWindow& window, const sf::Event& event)
   ImGui::SFML::ProcessEvent(window, event);
 }
 
-void UIManager::Update(sf::RenderWindow& window, Map& map) 
+void UIManager::Update(sf::RenderWindow& window, Map& map, PowerManager& powerManager) 
 {
   //Draw background
   window.draw(background);
@@ -30,7 +30,7 @@ void UIManager::Update(sf::RenderWindow& window, Map& map)
   // Update UI
   ImGui::SFML::Update(window, deltaClock.restart());
   UpdateRoundWindow(map);
-  UpdatePowerWindow();
+  UpdatePowerWindow(map, powerManager);
 }
 
 void UIManager::Render(sf::RenderWindow& window) 
@@ -66,20 +66,20 @@ void UIManager::UpdateRoundWindow(Map& map)
   ImGui::End();
 }
 
-void UIManager::UpdatePowerWindow() 
+void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager) 
 {
   ImGui::SetNextWindowPos(ImVec2(GetWindowPos().x, GetButtonPos(3).y + 10));
   ImGui::SetNextWindowSize(GetWindowSize(3));
   ImGui::Begin("Power");
 
-  // Power 1
+  // Freeze Power
   ImGui::SetCursorPos(GetButtonPos(0));
-  if (ImGui::Button("Power 1", ImVec2(ButtonWidth, ButtonHeight))) {
-    std::cout << "Power 1 activated" << std::endl;  // Temporary debug output
+  if (ImGui::Button("Freeze", ImVec2(ButtonWidth, ButtonHeight))) {
+    powerManager.SetFreezePower();
   }
 
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip("This power 1 ...");
+    ImGui::SetTooltip("Freeze one cell so that it will never change again");
   }
 
   // Power 2

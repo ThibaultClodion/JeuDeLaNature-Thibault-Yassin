@@ -4,7 +4,8 @@
 #include <imgui.h>
 
 #include "Param.h"
-#include "Map.h"
+#include "map/Map.h"
+#include "power/PowerManager.h"
 
 class UIManager 
 {
@@ -13,13 +14,13 @@ class UIManager
   UIManager(sf::RenderWindow& window);
 
   void ProcessEvent(sf::RenderWindow& window, const sf::Event& event);
-  void Update(sf::RenderWindow& window, Map& map);
+  void Update(sf::RenderWindow& window, Map& map, PowerManager& powerManager);
   void Render(sf::RenderWindow& window);
   void Shutdown();
 
 private:
   void UpdateRoundWindow(Map& map);
-  void UpdatePowerWindow();
+  void UpdatePowerWindow(Map& map, PowerManager& powerManager);
   
   sf::Clock deltaClock;
   sf::RectangleShape background;

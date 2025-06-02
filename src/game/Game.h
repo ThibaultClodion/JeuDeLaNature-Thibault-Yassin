@@ -2,8 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "Map.h"
+#include "map/Map.h"
 #include "UIManager.h"
+#include "power/PowerManager.h"
 
 class Game
 {
@@ -14,6 +15,7 @@ public:
 
 private:
   Map map;
+  PowerManager powerManager;
   UIManager uiManager;
   sf::RenderWindow window;
 };

@@ -1,9 +1,10 @@
 add_library(lib_core Param.h 
-Map.h Map.cpp
-Cell.h Cell.cpp 
-Nature.h Nature.cpp 
-Field.h Field.cpp
-Home.h Home.cpp)
+"map/Map.h" "map/Map.cpp"
+"map/Cell.h" "map/Cell.cpp" 
+"map/Nature.h" "map/Nature.cpp" 
+"map/Field.h" "map/Field.cpp"
+"map/Home.h" "map/Home.cpp" 
+"power/PowerManager.h"  "power/Power.h" "power/Freeze.h")
 
 target_include_directories(lib_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(lib_core PUBLIC sfml-graphics)
