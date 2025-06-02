@@ -69,8 +69,8 @@ void UIManager::UpdateRoundWindow(Map& map, PowerManager& powerManager)
 
 void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager) 
 {
-  ImGui::SetNextWindowPos(ImVec2(GetWindowPos().x, GetButtonPos(3).y + 10));
-  ImGui::SetNextWindowSize(GetWindowSize(3));
+  ImGui::SetNextWindowPos(ImVec2(GetWindowPos().x, GetButtonPos(5).y + 10));
+  ImGui::SetNextWindowSize(GetWindowSize(4));
   ImGui::Begin("Power");
 
   // Freeze Power
@@ -84,7 +84,7 @@ void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager)
       powerManager.GetPowerCooldown(0));
   }
 
-  // Power 2
+  // Naturalize Power
   ImGui::SetCursorPos(GetButtonPos(1));
   if (ImGui::Button("Naturalize", ImVec2(ButtonWidth, ButtonHeight))) {
     powerManager.SetPower(1);
@@ -94,6 +94,29 @@ void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager)
     ImGui::SetTooltip(
         "Make the cell nature again \n\nRemaining round to re-use : %d",
         powerManager.GetPowerCooldown(1));
+  }
+
+  // Earthquake Power
+  ImGui::SetCursorPos(GetButtonPos(2));
+  if (ImGui::Button("Earthquake", ImVec2(ButtonWidth, ButtonHeight))) {
+    std::cout << "Earthquake power activated!" << std::endl;
+  }
+
+  if (ImGui::IsItemHovered()) {
+    ImGui::SetTooltip(
+        "Earthquake destroys homes with an x%% chance in a lozenge-shaped "
+        "area of size n");
+  }
+
+  // Drought Power
+  ImGui::SetCursorPos(GetButtonPos(3));
+  if (ImGui::Button("Drought", ImVec2(ButtonWidth, ButtonHeight))) {
+    std::cout << "Drought power activated!" << std::endl;
+  }
+
+  if (ImGui::IsItemHovered()) {
+    ImGui::SetTooltip(
+        "Drought destroys fields with an x%% chance in a ... area");
   }
 
   ImGui::End();
