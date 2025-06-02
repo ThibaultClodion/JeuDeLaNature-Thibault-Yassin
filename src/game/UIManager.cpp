@@ -69,7 +69,7 @@ void UIManager::UpdateRoundWindow(Map& map, PowerManager& powerManager)
 
 void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager) 
 {
-  ImGui::SetNextWindowPos(ImVec2(GetWindowPos().x, GetButtonPos(5).y + 10));
+  ImGui::SetNextWindowPos(ImVec2(GetWindowPos().x, GetButtonPos(3).y + 10));
   ImGui::SetNextWindowSize(GetWindowSize(4));
   ImGui::Begin("Power");
 
