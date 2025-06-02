@@ -99,13 +99,14 @@ void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager)
   // Earthquake Power
   ImGui::SetCursorPos(GetButtonPos(2));
   if (ImGui::Button("Earthquake", ImVec2(ButtonWidth, ButtonHeight))) {
-    std::cout << "Earthquake power activated!" << std::endl;
+    powerManager.SetPower(2);
   }
 
   if (ImGui::IsItemHovered()) {
     ImGui::SetTooltip(
-        "Earthquake destroys homes with an x%% chance in a lozenge-shaped "
-        "area of size n");
+        "Earthquake destroys homes and fiels with a 75%% chance in a circle shape "
+        "of radius 5 \n\nRemaining round to re-use : %d",
+        powerManager.GetPowerCooldown(2));
   }
 
   // Drought Power

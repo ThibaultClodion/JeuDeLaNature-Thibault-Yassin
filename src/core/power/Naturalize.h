@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 #include "power/Power.h"
 #include "map/Nature.h"
 

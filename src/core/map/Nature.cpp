@@ -13,15 +13,19 @@ std::unique_ptr<Cell> Nature::nextGeneration(Map& map) {
   if (nbField + nbHome >= 3) 
   {
     // Randomly choose the less frequent neighbor type
-    int randomGeneration = rand() % (nbHome + nbField);
+    int randomGeneration = rand() % (nbHome + nbField + 1);
 
     if (randomGeneration < nbHome) 
     {
       return std::make_unique<Field>(x, y);
     } 
-    else 
+    else if (randomGeneration < nbHome + nbField)
     {
       return std::make_unique<Home>(x, y);
+    }
+    else
+    {
+      return std::make_unique<Nature>(x, y);
     }
   }
 

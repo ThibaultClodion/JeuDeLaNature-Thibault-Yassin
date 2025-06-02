@@ -1,11 +1,13 @@
 #include "PowerManager.h"
 #include "Freeze.h"
 #include "Naturalize.h"
+#include "Earthquake.h"
 
 PowerManager::PowerManager() 
 { 
   powers.push_back(std::make_unique<Freeze>());
   powers.push_back(std::make_unique<Naturalize>());
+  powers.push_back(std::make_unique<Earthquake>());
 }
 
 void PowerManager::UseCurrentPower(Map& map, int x, int y) 
