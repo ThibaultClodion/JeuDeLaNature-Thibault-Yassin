@@ -13,7 +13,8 @@ std::unique_ptr<Cell> Nature::nextGeneration(Map& map) {
   if (nbField + nbHome >= 3) 
   {
     // Randomly choose the less frequent neighbor type
-    int randomGeneration = rand() % (nbHome + nbField + 1);
+    // If is limited, nature cell appears twice as often
+    int randomGeneration = rand() % ((nbHome + nbField + 1) * (isLimited + 1));
 
     if (randomGeneration < nbHome) 
     {

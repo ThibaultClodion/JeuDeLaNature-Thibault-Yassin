@@ -20,10 +20,12 @@ public:
   virtual std::unique_ptr<Cell> nextGeneration(class Map& map) = 0;
 
   void Freeze() { isFrozen = true; }
+  void Limit() { isLimited = true; }
 
 protected:
   int x;
   int y;
   bool isFrozen = false;
+  bool isLimited = false;
 
 };

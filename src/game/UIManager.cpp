@@ -80,7 +80,8 @@ void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager)
   }
 
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip("Freeze one cell so that it will never change again \n\nRemaining round to re-use : %d", 
+    ImGui::SetTooltip("Freeze one cell so that it will never change again" 
+        "\n\nRemaining round to re-use : % d ", 
       powerManager.GetPowerCooldown(0));
   }
 
@@ -91,8 +92,8 @@ void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager)
   }
 
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip(
-        "Make the cell nature again \n\nRemaining round to re-use : %d",
+    ImGui::SetTooltip("Make the cell nature again"
+        "\n\nRemaining round to re-use : %d",
         powerManager.GetPowerCooldown(1));
   }
 
@@ -103,21 +104,22 @@ void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager)
   }
 
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip(
-        "Earthquake destroys homes and fiels with a 75%% chance in a circle shape "
-        "of radius 5 \n\nRemaining round to re-use : %d",
+    ImGui::SetTooltip("Earthquake destroys homes and fiels with a 75%% chance in a circle shape of radius 5" 
+        "\n\nRemaining round to re-use : % d ",
         powerManager.GetPowerCooldown(2));
   }
 
   // Drought Power
   ImGui::SetCursorPos(GetButtonPos(3));
-  if (ImGui::Button("Drought", ImVec2(ButtonWidth, ButtonHeight))) {
-    std::cout << "Drought power activated!" << std::endl;
+  if (ImGui::Button("Spread Limit", ImVec2(ButtonWidth, ButtonHeight))) {
+    powerManager.SetPower(3);
+    powerManager.UseCurrentPower(map, -1,-1);  // Use the power without coordinates);
   }
 
   if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip(
-        "Drought destroys fields with an x%% chance in a ... area");
+    ImGui::SetTooltip("Nature cell has 50%% to not be converted for next generation"
+        "\n\nRemaining round to re-use : % d",
+        powerManager.GetPowerCooldown(3));
   }
 
   ImGui::End();
