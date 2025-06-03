@@ -20,7 +20,7 @@ public:
   void Draw(sf::RenderWindow& window);
   virtual std::unique_ptr<Cell> nextGeneration(class Map& map) = 0;
 
-  void Freeze() { isFrozen = true; }
+  void Freeze();
   void Limit() { isLimited = true; }
 
 protected:

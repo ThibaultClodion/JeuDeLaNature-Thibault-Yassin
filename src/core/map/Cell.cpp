@@ -1,15 +1,7 @@
 #include "Cell.h"
 #include "Param.h"
 
-Cell::Cell(int x, int y) : x(x), y(y) 
-{
-  // Load the frozen texture if it hasn't been loaded yet
-  if (frozenTexture.getSize().x == 0) {
-    if (!frozenTexture.loadFromFile("resources/snowflake.png")) {
-      throw std::runtime_error("Failed to load frozen texture");
-    }
-  }
-}
+Cell::Cell(int x, int y) : x(x), y(y) {}
 
 void Cell::Draw(sf::RenderWindow& window) 
 {
@@ -31,5 +23,17 @@ void Cell::Draw(sf::RenderWindow& window)
                      CELL_SIZE / (float)frozenTexture.getSize().y});
 
     window.draw(sprite);
+  }
+}
+
+void Cell::Freeze() 
+{ 
+  isFrozen = true; 
+
+  // Load the frozen texture if it hasn't been loaded yet
+  if (frozenTexture.getSize().x == 0) {
+    if (!frozenTexture.loadFromFile("resources/snowflake.png")) {
+      throw std::runtime_error("Failed to load frozen texture");
+    }
   }
 }
