@@ -11,12 +11,15 @@ Game::Game()
                           "Jeu De La Nature"};
   window.setFramerateLimit(30);
 
-  // Initialize UIManager
+  context = C_MainMenu;
+  mainMenu = MainMenu(window);
+
+  /*// Initialize UIManager
   uiManager = UIManager(window);
 
   // Initialize the map and the powers
   map = Map{1};
-  powerManager = PowerManager();
+  powerManager = PowerManager();*/
 }
 
 void Game::Run() 
@@ -57,12 +60,21 @@ void Game::Run()
     window.clear();
 
     // Draw the background and the ui
-    uiManager.Update(window, map, powerManager);
-    map.Draw(window);
-    uiManager.Render(window);
+    if (context == C_Game)
+    {
+      uiManager.Update(window, map, powerManager);
+      map.Draw(window);
+      uiManager.Render(window);
+    } 
+    else if (context == C_MainMenu) 
+    {
+      mainMenu.Update(window);
+      mainMenu.Render(window);
+    }
 
     window.display();
   }
   
   uiManager.Shutdown();
+  mainMenu.Shutdown();
 }
