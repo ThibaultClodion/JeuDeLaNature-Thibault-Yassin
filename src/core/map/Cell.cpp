@@ -1,7 +1,15 @@
 #include "Cell.h"
 #include "Param.h"
 
-Cell::Cell(int x, int y) : x(x), y(y) {}
+Cell::Cell(int x, int y) : x(x), y(y) 
+{
+  // Load the frozen texture if it hasn't been loaded yet
+  if (frozenTexture.getSize().x == 0) {
+    if (!frozenTexture.loadFromFile("resources/snowflake.png")) {
+      throw std::runtime_error("Failed to load frozen texture");
+    }
+  }
+}
 
 void Cell::Draw(sf::RenderWindow& window) 
 {
@@ -17,10 +25,11 @@ void Cell::Draw(sf::RenderWindow& window)
   // TODO : modify the overlay with a snowflake texture
   if (isFrozen) 
   {
-    sf::RectangleShape overlay(sf::Vector2f(CELL_SIZE, CELL_SIZE));
-    overlay.setPosition({(float)x * CELL_SIZE, (float)y * CELL_SIZE});
-    overlay.setFillColor(
-        sf::Color(100, 100, 255, 100));
-    window.draw(overlay);
+    sf::Sprite sprite(frozenTexture);
+    sprite.setPosition({(float)x * CELL_SIZE, (float)y * CELL_SIZE});
+    sprite.setScale({CELL_SIZE / (float)frozenTexture.getSize().x,
+                     CELL_SIZE / (float)frozenTexture.getSize().y});
+
+    window.draw(sprite);
   }
 }

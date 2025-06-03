@@ -28,6 +28,7 @@ protected:
   int y;
   sf::Texture texture;
   bool isFrozen = false;
+  sf::Texture frozenTexture;
   bool isLimited = false;
 
 };
