@@ -5,15 +5,13 @@ Cell::Cell(int x, int y) : x(x), y(y) {}
 
 void Cell::Draw(sf::RenderWindow& window) 
 {
-  sf::RectangleShape rectangle(sf::Vector2f(CELL_SIZE, CELL_SIZE));
-  rectangle.setPosition({(float)x * CELL_SIZE, (float)y * CELL_SIZE});
-  rectangle.setFillColor(GetColor());
+  sf::Texture spriteTexture = GetTexture();
+  sf::Sprite sprite(spriteTexture);
+  sprite.setPosition({(float)x * CELL_SIZE, (float)y * CELL_SIZE});
+  sprite.setScale({CELL_SIZE / (float)spriteTexture.getSize().x,
+                   CELL_SIZE / (float)spriteTexture.getSize().y});
 
-  // make the rectangle border black
-  rectangle.setOutlineColor(sf::Color::Black);
-  rectangle.setOutlineThickness(1.f);
-
-  window.draw(rectangle);
+  window.draw(sprite);
 
   // Add blue overlay if the cell is frozen
   // TODO : modify the overlay with a snowflake texture

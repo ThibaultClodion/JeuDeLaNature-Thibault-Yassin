@@ -3,6 +3,19 @@
 #include "Home.h"
 #include "Map.h"
 
+sf::Texture Nature::GetTexture() 
+{
+  if (texture.getSize().x == 0) {
+    int randomInt = rand() % 2 + 1;  // Randomly choose between 1 and 2
+    if (!texture.loadFromFile("resources/tree_" + std::to_string(randomInt) +
+                              ".png")) {
+      throw std::runtime_error("Failed to load texture for Nature cell");
+    }
+  }
+
+  return texture;
+}
+
 std::unique_ptr<Cell> Nature::nextGeneration(Map& map) {
 
   if (isFrozen) return std::make_unique<Nature>(x, y);
@@ -30,5 +43,5 @@ std::unique_ptr<Cell> Nature::nextGeneration(Map& map) {
     }
   }
 
-  return std::make_unique<Nature>(x, y);
+  return std::make_unique<Nature>(*this);
 }

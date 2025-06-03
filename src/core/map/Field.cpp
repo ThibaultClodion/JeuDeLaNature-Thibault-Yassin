@@ -2,8 +2,20 @@
 #include "Nature.h"
 #include "Map.h"
 
-std::unique_ptr<Cell> Field::nextGeneration(Map& map) 
+sf::Texture Field::GetTexture() 
 {
+  if (texture.getSize().x == 0) {
+    int randomInt = rand() % 4 + 1;  // Randomly choose between 1 and 2
+    if (!texture.loadFromFile("resources/grass_" + std::to_string(randomInt) +
+                              ".png")) {
+      throw std::runtime_error("Failed to load texture for Field cell");
+    }
+  }
+
+  return texture;
+}
+
+std::unique_ptr<Cell> Field::nextGeneration(Map& map) {
   if (isFrozen) return std::make_unique<Field>(x, y);
 
   int nbNature = map.CountNeighbors(x, y, CT_Nature);
@@ -11,5 +23,5 @@ std::unique_ptr<Cell> Field::nextGeneration(Map& map)
   // Field returns to nature if isolated
   if (nbNature == 8) return std::make_unique<Nature>(x, y);
 
-  return std::make_unique<Field>(x, y);
+  return std::make_unique<Field>(*this);
 }
