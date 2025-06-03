@@ -98,29 +98,57 @@ void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager)
         powerManager.GetPowerCooldown(1));
   }
 
-  // Earthquake Power
+  // Drought Power
   ImGui::SetCursorPos(GetButtonPos(2));
-  if (ImGui::Button("Earthquake", ImVec2(ButtonWidth, ButtonHeight))) {
+  if (ImGui::Button("Spread Limit", ImVec2(ButtonWidth, ButtonHeight))) {
     powerManager.SetPower(2);
+    powerManager.UseCurrentPower(map, -1,
+                                 -1);  // Use the power without coordinates);
+  }
+
+  if (ImGui::IsItemHovered()) {
+    ImGui::SetTooltip(
+        "Nature cell has 50%% to not be converted for next generation"
+        "\n\nRemaining round to re-use : % d",
+        powerManager.GetPowerCooldown(2));
+  }
+
+    // Wind Power
+  ImGui::SetCursorPos(GetButtonPos(3));
+  if (ImGui::Button("Wind", ImVec2(ButtonWidth, ButtonHeight))) {
+    powerManager.SetPower(3);
+  }
+
+  if (ImGui::IsItemHovered()) {
+    ImGui::SetTooltip(
+        "Randomize cells in a 3x3 square"
+        "\n\nRemaining round to re-use : % d",
+        powerManager.GetPowerCooldown(3));
+  }
+
+  // Sunlight Power
+  ImGui::SetCursorPos(GetButtonPos(4));
+  if (ImGui::Button("Sunlight", ImVec2(ButtonWidth, ButtonHeight))) {
+    powerManager.SetPower(4);
+  }
+
+  if (ImGui::IsItemHovered()) {
+    ImGui::SetTooltip(
+        "Destroy all fields in a cross shape"
+        "\n\nRemaining round to re-use : % d",
+        powerManager.GetPowerCooldown(4));
+  }
+
+  // Earthquake Power
+  ImGui::SetCursorPos(GetButtonPos(5));
+  if (ImGui::Button("Earthquake", ImVec2(ButtonWidth, ButtonHeight))) {
+    powerManager.SetPower(5);
   }
 
   if (ImGui::IsItemHovered()) {
     ImGui::SetTooltip("Earthquake destroys homes and fiels with a 75%% chance in a circle shape of radius 5" 
         "\n\nRemaining round to re-use : % d ",
-        powerManager.GetPowerCooldown(2));
-  }
-
-  // Drought Power
-  ImGui::SetCursorPos(GetButtonPos(3));
-  if (ImGui::Button("Spread Limit", ImVec2(ButtonWidth, ButtonHeight))) {
-    powerManager.SetPower(3);
-    powerManager.UseCurrentPower(map, -1,-1);  // Use the power without coordinates);
-  }
-
-  if (ImGui::IsItemHovered()) {
-    ImGui::SetTooltip("Nature cell has 50%% to not be converted for next generation"
-        "\n\nRemaining round to re-use : % d",
-        powerManager.GetPowerCooldown(3));
+        powerManager.GetPowerCooldown(5));
   }
 
   ImGui::End();

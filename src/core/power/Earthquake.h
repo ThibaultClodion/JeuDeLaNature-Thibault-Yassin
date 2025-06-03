@@ -11,8 +11,8 @@ class Earthquake : public Power {
  public:
   Earthquake() 
   { 
-    cooldown = 4;
-    maxCooldown = 5; 
+    cooldown = 10;
+    maxCooldown = 7; 
   };
 
   void Activate(Map& map, int x, int y) override 

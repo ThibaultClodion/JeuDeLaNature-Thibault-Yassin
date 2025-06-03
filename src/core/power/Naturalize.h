@@ -5,7 +5,10 @@
 
 class Naturalize : public Power {
  public:
-  Naturalize() { maxCooldown = 2; };
+  Naturalize() {
+    cooldown = 1;
+    maxCooldown = 2;
+  };
 
   void Activate(Map& map, int x, int y) override 
   {

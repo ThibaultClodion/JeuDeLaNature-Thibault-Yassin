@@ -4,7 +4,10 @@
 
 class SpreadLimit : public Power {
  public:
-  SpreadLimit() { maxCooldown = 3; };
+  SpreadLimit() {
+    cooldown = 3;
+    maxCooldown = 10;
+  };
 
   void Activate(Map& map, int x, int y) override 
   {
