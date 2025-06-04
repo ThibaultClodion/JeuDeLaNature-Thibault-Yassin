@@ -13,10 +13,7 @@ class UIManager
   UIManager() = default;
   UIManager(sf::RenderWindow& window);
 
-  void ProcessEvent(sf::RenderWindow& window, const sf::Event& event);
   void Update(sf::RenderWindow& window, Map& map, PowerManager& powerManager);
-  void Render(sf::RenderWindow& window);
-  void Shutdown();
 
 private:
   void UpdateRoundWindow(Map& map, PowerManager& powerManager);

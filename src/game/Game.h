@@ -16,6 +16,7 @@ class Game
 public:
   Game();
   void Run();
+  void Play() { context = C_Game; };
 
 private:
   Context context;

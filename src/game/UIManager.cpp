@@ -1,25 +1,13 @@
 #include <SFML/Graphics.hpp>
-#include <iostream> // For temporary std::cout
 
 #include "UIManager.h"
 #include "Param.h"
 
 UIManager::UIManager(sf::RenderWindow& window) 
 {
-  // Initialize ImGui-SFML
-  if (!ImGui::SFML::Init(window)) 
-  {
-    throw std::runtime_error("Failed to initialize ImGui-SFML");
-  }
-
   // Define background
   background = sf::RectangleShape(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
   background.setFillColor(sf::Color::White);
-}
-
-void UIManager::ProcessEvent(sf::RenderWindow& window, const sf::Event& event) 
-{
-  ImGui::SFML::ProcessEvent(window, event);
 }
 
 void UIManager::Update(sf::RenderWindow& window, Map& map, PowerManager& powerManager) 
@@ -32,16 +20,6 @@ void UIManager::Update(sf::RenderWindow& window, Map& map, PowerManager& powerMa
   UpdateRoundWindow(map, powerManager);
   UpdatePowerWindow(map, powerManager);
   UpdateIndicationWindow();
-}
-
-void UIManager::Render(sf::RenderWindow& window) 
-{ 
-  ImGui::SFML::Render(window); 
-}
-
-void UIManager::Shutdown()
-{
-  ImGui::SFML::Shutdown();
 }
 
 void UIManager::UpdateRoundWindow(Map& map, PowerManager& powerManager) 

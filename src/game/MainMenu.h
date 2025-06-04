@@ -6,19 +6,18 @@
 
 #include "Param.h"
 
+class Game;
+
 class MainMenu 
 {
  public:
   MainMenu() = default;
   MainMenu(sf::RenderWindow& window);
 
-  void ProcessEvent(sf::RenderWindow& window, const sf::Event& event);
-  void Update(sf::RenderWindow& window);
-  void Render(sf::RenderWindow& window);
-  void Shutdown();
+  void Update(sf::RenderWindow& window, Game* game);
 
  private:
-  void UpdateButtons();
+  void UpdateButtons(Game* game);
 
   sf::Clock deltaClock;
   sf::RectangleShape background;

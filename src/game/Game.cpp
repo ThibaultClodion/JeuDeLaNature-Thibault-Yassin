@@ -2,24 +2,28 @@
 #include "Param.h"
 #include "UIManager.h"
 
-#include <iostream> // Temporary for std::cout
-
 Game::Game() 
 {
   // Create the main window
   window = sf::RenderWindow{sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}),
-                          "Jeu De La Nature"};
+                            "Jeu De La Nature"};
   window.setFramerateLimit(30);
 
+  // Initialize Main menu
   context = C_MainMenu;
   mainMenu = MainMenu(window);
 
-  /*// Initialize UIManager
+  // Initialize in game UI
   uiManager = UIManager(window);
 
   // Initialize the map and the powers
   map = Map{1};
-  powerManager = PowerManager();*/
+  powerManager = PowerManager();
+
+  // Initialize ImGui-SFML
+  if (!ImGui::SFML::Init(window)) {
+    throw std::runtime_error("Failed to initialize ImGui-SFML");
+  }
 }
 
 void Game::Run() 
@@ -28,7 +32,8 @@ void Game::Run()
   {
     while (const std::optional event = window.pollEvent()) 
     {
-      uiManager.ProcessEvent(window, *event);
+      // Process ImGui events
+      ImGui::SFML::ProcessEvent(window, *event);
 
       // Handle the close event
       if (event->is<sf::Event::Closed>()) window.close();
@@ -59,22 +64,21 @@ void Game::Run()
 
     window.clear();
 
-    // Draw the background and the ui
+    // Draw the map and in game UI
     if (context == C_Game)
     {
       uiManager.Update(window, map, powerManager);
       map.Draw(window);
-      uiManager.Render(window);
     } 
+    // Draw the main menu
     else if (context == C_MainMenu) 
     {
-      mainMenu.Update(window);
-      mainMenu.Render(window);
+      mainMenu.Update(window, this);
     }
+    ImGui::SFML::Render(window);
 
     window.display();
   }
-  
-  uiManager.Shutdown();
-  mainMenu.Shutdown();
+
+  ImGui::SFML::Shutdown();
 }
