@@ -11,7 +11,7 @@ Game::Game()
 
   // Initialize Main menu
   context = C_MainMenu;
-  mainMenu = MainMenu(window);
+  mainMenu = std::make_unique<MainMenu>(window);
 
   // Initialize in game UI
   uiManager = UIManager(window);
@@ -73,7 +73,7 @@ void Game::Run()
     // Draw the main menu
     else if (context == C_MainMenu) 
     {
-      mainMenu.Update(window, this);
+      mainMenu.get()->Update(window, this);
     }
     ImGui::SFML::Render(window);
 

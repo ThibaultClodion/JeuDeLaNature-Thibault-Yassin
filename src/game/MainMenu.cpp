@@ -20,21 +20,44 @@ void MainMenu::Update(sf::RenderWindow& window, Game* game)
 
 void MainMenu::UpdateButtons(Game* game) 
 {
-  ImGui::SetNextWindowPos(ImVec2(0,0));
-  ImGui::SetNextWindowSize(ImVec2(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2));
-  ImGui::Begin("Main Menu");
+  const int nbButtons = 2;
 
-  
-  ImGui::SetCursorPos(ImVec2(0, 0));
-  if (ImGui::Button("Play", ImVec2(200, 200))) 
-  {
+  ImGui::SetNextWindowPos(GetWindowSize(nbButtons));
+  ImGui::SetNextWindowSize(GetWindowPos(GetWindowSize(nbButtons)));
+
+  ImGui::Begin("Main Menu", nullptr,
+               ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
+                   ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse |
+                   ImGuiWindowFlags_NoScrollbar);
+
+  // Play button
+  ImGui::SetCursorPos(GetButtonPos(0));
+  if (ImGui::Button("Play", ImVec2(ButtonWidth, ButtonHeight))) {
     game->Play();
   }
 
-  ImGui::SetCursorPos(ImVec2(0, 200));
-  if (ImGui::Button("Quit", ImVec2(200, 200))) {
+  // Quit button
+  ImGui::SetCursorPos(GetButtonPos(1));
+  if (ImGui::Button("Quit", ImVec2(ButtonWidth, ButtonHeight))) {
     game->Quit();
   }
 
   ImGui::End();
+}
+
+ImVec2 MainMenu::GetWindowSize(int nbButtons) const {
+  float height =
+      nbButtons * ButtonHeight + (nbButtons - 1) * ButtonSpacing + 20;
+  return ImVec2(400, height);
+}
+
+ImVec2 MainMenu::GetWindowPos(ImVec2 windowSize) const {
+  return ImVec2((WINDOW_WIDTH - windowSize.x) / 2.f,
+                (WINDOW_HEIGHT - windowSize.y) / 2.f);
+}
+
+ImVec2 MainMenu::GetButtonPos(int buttonIndex) const {
+  float x = (400 - ButtonWidth) / 2.f;  // Centrage horizontal
+  float y = 10 + buttonIndex * (ButtonHeight + ButtonSpacing);
+  return ImVec2(x, y);
 }

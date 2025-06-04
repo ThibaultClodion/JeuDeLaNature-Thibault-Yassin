@@ -21,4 +21,13 @@ class MainMenu
 
   sf::Clock deltaClock;
   sf::RectangleShape background;
+
+  // UI Layout helpers
+  ImVec2 GetWindowSize(int nbButtons) const;
+  ImVec2 GetWindowPos(ImVec2 windowSize) const;
+  ImVec2 GetButtonPos(int buttonIndex) const;
+
+  const int ButtonWidth = 200;
+  const int ButtonHeight = 60;
+  const int ButtonSpacing = 20;
 };

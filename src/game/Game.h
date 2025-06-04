@@ -24,6 +24,6 @@ private:
   Map map;
   PowerManager powerManager;
   UIManager uiManager;
-  MainMenu mainMenu;
+  std::unique_ptr<MainMenu> mainMenu;
   sf::RenderWindow window;
 };
