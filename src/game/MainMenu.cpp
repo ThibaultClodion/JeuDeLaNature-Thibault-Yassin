@@ -31,5 +31,10 @@ void MainMenu::UpdateButtons(Game* game)
     game->Play();
   }
 
+  ImGui::SetCursorPos(ImVec2(0, 200));
+  if (ImGui::Button("Quit", ImVec2(200, 200))) {
+    game->Quit();
+  }
+
   ImGui::End();
 }

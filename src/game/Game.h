@@ -17,6 +17,7 @@ public:
   Game();
   void Run();
   void Play() { context = C_Game; };
+  void Quit() { window.close(); };
 
 private:
   Context context;
