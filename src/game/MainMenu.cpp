@@ -4,13 +4,13 @@
 MainMenu::MainMenu(sf::RenderWindow& window) 
 {
   // Define background
-  background = sf::RectangleShape(sf::Vector2f(WINDOW_WIDTH, WINDOW_HEIGHT));
-  background.setFillColor(sf::Color::White);
+  backgroundTexture.loadFromFile("resources/main_menu.png");
 }
 
 void MainMenu::Update(sf::RenderWindow& window, Game* game)
 {
   // Draw background
+  sf::Sprite background(backgroundTexture);
   window.draw(background);
 
   // Update UI
@@ -20,29 +20,52 @@ void MainMenu::Update(sf::RenderWindow& window, Game* game)
 
 void MainMenu::UpdateButtons(Game* game) 
 {
-  const int nbButtons = 2;
+  const int nbButtons = 3;
 
   ImGui::SetNextWindowPos(GetWindowSize(nbButtons));
   ImGui::SetNextWindowSize(GetWindowPos(GetWindowSize(nbButtons)));
 
+  ButtonStyle();
+
   ImGui::Begin("Main Menu", nullptr,
                ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
                    ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse |
-                   ImGuiWindowFlags_NoScrollbar);
+                   ImGuiWindowFlags_NoScrollbar |
+                   ImGuiWindowFlags_NoBackground);
 
-  // Play button
   ImGui::SetCursorPos(GetButtonPos(0));
   if (ImGui::Button("Play", ImVec2(ButtonWidth, ButtonHeight))) {
     game->Play();
   }
 
-  // Quit button
   ImGui::SetCursorPos(GetButtonPos(1));
+  if (ImGui::Button("Options", ImVec2(ButtonWidth, ButtonHeight))) {
+    // Option logic
+  }
+
+  ImGui::SetCursorPos(GetButtonPos(2));
   if (ImGui::Button("Quit", ImVec2(ButtonWidth, ButtonHeight))) {
     game->Quit();
   }
 
   ImGui::End();
+
+
+  ResetButtonStyle();
+}
+
+void MainMenu::ButtonStyle() 
+{
+  ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(20, 10));
+  ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.0f, 0.5f, 0.2f, 1.0f));
+  ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.9f, 0.7f, 0.2f, 1.0f));
+  ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.8f, 0.4f, 0.0f, 1.0f));
+  ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+}
+
+void MainMenu::ResetButtonStyle() {
+  ImGui::PopStyleColor(4);
+  ImGui::PopStyleVar();
 }
 
 ImVec2 MainMenu::GetWindowSize(int nbButtons) const {

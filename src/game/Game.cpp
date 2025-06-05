@@ -9,16 +9,15 @@ Game::Game()
                             "Jeu De La Nature"};
   window.setFramerateLimit(30);
 
-  // Initialize Main menu
-  context = C_MainMenu;
-  mainMenu = std::make_unique<MainMenu>(window);
-
   // Initialize in game UI
   uiManager = UIManager(window);
 
-  // Initialize the map and the powers
-  map = Map{1};
+  // Initialize the powers
   powerManager = PowerManager();
+
+  // Initialize Main menu
+  context = C_MainMenu;
+  mainMenu = std::make_unique<MainMenu>(window);
 
   // Initialize ImGui-SFML
   if (!ImGui::SFML::Init(window)) {
@@ -81,4 +80,11 @@ void Game::Run()
   }
 
   ImGui::SFML::Shutdown();
+}
+
+void Game::Play()
+{
+  context = C_Game;
+  map = Map{1};
+  powerManager.Reset();
 }

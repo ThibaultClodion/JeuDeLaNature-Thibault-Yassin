@@ -18,9 +18,11 @@ class MainMenu
 
  private:
   void UpdateButtons(Game* game);
+  void ButtonStyle();
+  void ResetButtonStyle();
 
+  sf::Texture backgroundTexture;
   sf::Clock deltaClock;
-  sf::RectangleShape background;
 
   // UI Layout helpers
   ImVec2 GetWindowSize(int nbButtons) const;
@@ -28,6 +30,6 @@ class MainMenu
   ImVec2 GetButtonPos(int buttonIndex) const;
 
   const int ButtonWidth = 200;
-  const int ButtonHeight = 60;
-  const int ButtonSpacing = 20;
+  const int ButtonHeight = 50;
+  const int ButtonSpacing = 40;
 };

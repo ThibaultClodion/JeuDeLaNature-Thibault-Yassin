@@ -17,16 +17,18 @@ void UIManager::Update(sf::RenderWindow& window, Map& map, PowerManager& powerMa
 
   // Update UI
   ImGui::SFML::Update(window, deltaClock.restart());
+  ButtonStyle();
   UpdateRoundWindow(map, powerManager);
   UpdatePowerWindow(map, powerManager);
   UpdateIndicationWindow();
+  ResetButtonStyle();
 }
 
 void UIManager::UpdateRoundWindow(Map& map, PowerManager& powerManager) 
 {
   ImGui::SetNextWindowPos(GetWindowPos());
   ImGui::SetNextWindowSize(GetWindowSize(3));
-  ImGui::Begin("Round");
+  ImGui::Begin("Round", nullptr, ImGuiWindowFlags_NoCollapse);
 
   ImGui::SetCursorPos(GetButtonPos(0));
   ImGui::Text("Round: %d", map.GetRound());
@@ -50,7 +52,7 @@ void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager)
 {
   ImGui::SetNextWindowPos(ImVec2(GetWindowPos().x, GetButtonPos(3).y + 10));
   ImGui::SetNextWindowSize(GetWindowSize(6));
-  ImGui::Begin("Power");
+  ImGui::Begin("Power", nullptr, ImGuiWindowFlags_NoCollapse);
 
   // Freeze Power
   ImGui::SetCursorPos(GetButtonPos(0));
@@ -137,7 +139,7 @@ void UIManager::UpdateIndicationWindow()
   ImGui::SetNextWindowPos(ImVec2(GetWindowPos().x, GetButtonPos(10).y + 10));
   ImGui::SetNextWindowSize(GetWindowSize(2));
 
-  ImGui::Begin("Indication");
+  ImGui::Begin("Indication", nullptr, ImGuiWindowFlags_NoCollapse);
 
   ImGui::SetCursorPos(GetButtonPos(0));
   ImGui::Text("Rule 1 : A nature cell transforms into a field or\n"
@@ -149,4 +151,19 @@ void UIManager::UpdateIndicationWindow()
   ImGui::Text("\nRule 2 : Isolated fields and homes are destroyed");
 
   ImGui::End();
+}
+
+void UIManager::ButtonStyle() {
+  ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(20, 10));
+  ImGui::PushStyleColor(ImGuiCol_TitleBgActive, ImVec4(0.0f, 0.3f, 0.2f, 1.0f));
+  ImGui::PushStyleColor(ImGuiCol_TitleBg, ImVec4(0.0f, 0.3f, 0.2f, 1.0f));
+  ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.0f, 0.5f, 0.2f, 1.0f));
+  ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.9f, 0.7f, 0.2f, 1.0f));
+  ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0.8f, 0.4f, 0.0f, 1.0f));
+  ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+}
+
+void UIManager::ResetButtonStyle() {
+  ImGui::PopStyleColor(6);
+  ImGui::PopStyleVar();
 }

@@ -16,7 +16,8 @@ class Game
 public:
   Game();
   void Run();
-  void Play() { context = C_Game; };
+  void Play();
+  void End() {context = C_MainMenu;};
   void Quit() { window.close(); };
 
 private:

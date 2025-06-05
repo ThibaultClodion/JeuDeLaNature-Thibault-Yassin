@@ -7,7 +7,7 @@
 #include "Field.h"
 #include "Home.h"
 
-Map::Map(int randomizeCenterSize) 
+Map::Map(bool randomizeCenterSize) 
 {
   grid.resize(NB_CELL_ROW);
 

@@ -19,6 +19,8 @@ private:
   void UpdateRoundWindow(Map& map, PowerManager& powerManager);
   void UpdatePowerWindow(Map& map, PowerManager& powerManager);
   void UpdateIndicationWindow();
+  void ButtonStyle();
+  void ResetButtonStyle();
   
   sf::Clock deltaClock;
   sf::RectangleShape background;

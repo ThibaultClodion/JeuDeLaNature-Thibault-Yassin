@@ -9,6 +9,7 @@ public:
 
   void UseCurrentPower(Map& map, int x, int y);
   void UpdateCooldown();
+  void Reset();
 
   void SetPower(int i) { currentPower = i; };
   int GetPowerCooldown(int i) { return powers[i]->GetCooldown();}

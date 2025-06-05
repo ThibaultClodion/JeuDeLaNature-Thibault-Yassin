@@ -10,7 +10,7 @@ class Map
 
 public:
   Map() = default;
-  Map(int randomizeCenterSize);
+  Map(bool randomizeCenterSize);
   void Draw(sf::RenderWindow& window) const;
   
   void NextGeneration();
