@@ -7,16 +7,18 @@
 #include "map/Map.h"
 #include "power/PowerManager.h"
 
+class Game;
+
 class UIManager 
 {
  public:
   UIManager() = default;
   UIManager(sf::RenderWindow& window);
 
-  void Update(sf::RenderWindow& window, Map& map, PowerManager& powerManager);
+  void Update(sf::RenderWindow& window, Map& map, PowerManager& powerManager, Game* game);
 
 private:
-  void UpdateRoundWindow(Map& map, PowerManager& powerManager);
+  void UpdateRoundWindow(Map& map, PowerManager& powerManager, Game* game);
   void UpdatePowerWindow(Map& map, PowerManager& powerManager);
   void UpdateIndicationWindow();
   void ButtonStyle();

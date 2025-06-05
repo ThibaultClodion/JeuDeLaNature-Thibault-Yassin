@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "UIManager.h"
+#include "Game.h"
 #include "Param.h"
 
 UIManager::UIManager(sf::RenderWindow& window) 
@@ -10,7 +11,7 @@ UIManager::UIManager(sf::RenderWindow& window)
   background.setFillColor(sf::Color::White);
 }
 
-void UIManager::Update(sf::RenderWindow& window, Map& map, PowerManager& powerManager) 
+void UIManager::Update(sf::RenderWindow& window, Map& map, PowerManager& powerManager, Game* game) 
 {
   //Draw background
   window.draw(background);
@@ -18,13 +19,13 @@ void UIManager::Update(sf::RenderWindow& window, Map& map, PowerManager& powerMa
   // Update UI
   ImGui::SFML::Update(window, deltaClock.restart());
   ButtonStyle();
-  UpdateRoundWindow(map, powerManager);
+  UpdateRoundWindow(map, powerManager, game);
   UpdatePowerWindow(map, powerManager);
   UpdateIndicationWindow();
   ResetButtonStyle();
 }
 
-void UIManager::UpdateRoundWindow(Map& map, PowerManager& powerManager) 
+void UIManager::UpdateRoundWindow(Map& map, PowerManager& powerManager, Game* game) 
 {
   ImGui::SetNextWindowPos(GetWindowPos());
   ImGui::SetNextWindowSize(GetWindowSize(3));
@@ -36,7 +37,13 @@ void UIManager::UpdateRoundWindow(Map& map, PowerManager& powerManager)
   ImGui::Text("Nature Cells: %d", map.GetNbNatureCell());
 
   ImGui::SetCursorPos(GetButtonPos(2));
-  if (ImGui::Button("Next Generation", ImVec2(ButtonWidth, ButtonHeight))) {
+  if (ImGui::Button("Next Generation", ImVec2(ButtonWidth, ButtonHeight))) 
+  {
+    if (map.GetRound() == NB_ROUNDS)
+    {
+      game->End();
+    }
+
     map.NextGeneration();
     powerManager.UpdateCooldown();
   }

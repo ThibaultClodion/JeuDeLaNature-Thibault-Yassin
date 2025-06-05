@@ -15,3 +15,4 @@ constexpr int WINDOW_HEIGHT = CELL_SIZE * NB_CELL_ROW;
 // Paramètres de génération
 constexpr int MIN_NON_NATURE = 5;  // Nombre minimum de cellules non-nature
 constexpr int RANDOM_EXTENSION_SIZE = 1;  // Taille de l'extension aléatoire autour du centre
+constexpr int NB_ROUNDS = 25;

@@ -66,7 +66,7 @@ void Game::Run()
     // Draw the map and in game UI
     if (context == C_Game)
     {
-      uiManager.Update(window, map, powerManager);
+      uiManager.Update(window, map, powerManager, this);
       map.Draw(window);
     } 
     // Draw the main menu
