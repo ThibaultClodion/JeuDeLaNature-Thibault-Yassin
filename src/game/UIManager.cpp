@@ -41,7 +41,7 @@ void UIManager::UpdateRoundWindow(Map& map, PowerManager& powerManager, Game* ga
   {
     if (map.GetRound() == NB_ROUNDS)
     {
-      game->End();
+      game->End(map.GetNbNatureCell());
     }
 
     map.NextGeneration();

@@ -88,3 +88,9 @@ void Game::Play()
   map = Map{1};
   powerManager.Reset();
 }
+
+void Game::End(int nbNatureCell) 
+{
+  context = C_MainMenu;
+  mainMenu->nbNatureCell = nbNatureCell;
+}

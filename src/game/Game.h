@@ -17,7 +17,7 @@ public:
   Game();
   void Run();
   void Play();
-  void End() {context = C_MainMenu;};
+  void End(int nbNatureCell);
   void Quit() { window.close(); };
 
 private:

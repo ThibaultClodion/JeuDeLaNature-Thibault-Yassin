@@ -15,17 +15,17 @@ void MainMenu::Update(sf::RenderWindow& window, Game* game)
 
   // Update UI
   ImGui::SFML::Update(window, deltaClock.restart());
+  ButtonStyle();
   UpdateButtons(game);
+  ResetButtonStyle();
 }
 
 void MainMenu::UpdateButtons(Game* game) 
 {
-  const int nbButtons = 3;
+  const int nbButtons = 4;
 
-  ImGui::SetNextWindowPos(GetWindowSize(nbButtons));
-  ImGui::SetNextWindowSize(GetWindowPos(GetWindowSize(nbButtons)));
-
-  ButtonStyle();
+  ImGui::SetNextWindowSize(GetWindowSize(nbButtons));
+  ImGui::SetNextWindowPos(GetWindowPos(ImGui::GetWindowSize()));
 
   ImGui::Begin("Main Menu", nullptr,
                ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
@@ -48,10 +48,13 @@ void MainMenu::UpdateButtons(Game* game)
     game->Quit();
   }
 
+  if (nbNatureCell >= 0) 
+  {
+    ImGui::SetCursorPos(GetButtonPos(3));
+    ImGui::Text("Nature cells saved : %d", nbNatureCell);
+  }
+
   ImGui::End();
-
-
-  ResetButtonStyle();
 }
 
 void MainMenu::ButtonStyle() 
@@ -68,19 +71,21 @@ void MainMenu::ResetButtonStyle() {
   ImGui::PopStyleVar();
 }
 
-ImVec2 MainMenu::GetWindowSize(int nbButtons) const {
-  float height =
-      nbButtons * ButtonHeight + (nbButtons - 1) * ButtonSpacing + 20;
-  return ImVec2(400, height);
+ImVec2 MainMenu::GetWindowSize(int nbButtons) const 
+{
+  float height = nbButtons * ButtonHeight + (nbButtons - 1) * ButtonSpacing + 20;
+  return ImVec2(ButtonWidth * 2, height);
 }
 
-ImVec2 MainMenu::GetWindowPos(ImVec2 windowSize) const {
+ImVec2 MainMenu::GetWindowPos(ImVec2 windowSize) const 
+{
   return ImVec2((WINDOW_WIDTH - windowSize.x) / 2.f,
                 (WINDOW_HEIGHT - windowSize.y) / 2.f);
 }
 
-ImVec2 MainMenu::GetButtonPos(int buttonIndex) const {
-  float x = (400 - ButtonWidth) / 2.f;  // Centrage horizontal
+ImVec2 MainMenu::GetButtonPos(int buttonIndex) const 
+{
+  float x = ButtonWidth / 2.f;
   float y = 10 + buttonIndex * (ButtonHeight + ButtonSpacing);
   return ImVec2(x, y);
 }

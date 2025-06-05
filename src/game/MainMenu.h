@@ -16,6 +16,8 @@ class MainMenu
 
   void Update(sf::RenderWindow& window, Game* game);
 
+  int nbNatureCell = -1;
+
  private:
   void UpdateButtons(Game* game);
   void ButtonStyle();
