@@ -7,7 +7,7 @@ class PowerManager
 public:
   PowerManager();
 
-  void UseCurrentPower(Map& map, int x, int y);
+  void UseCurrentPower(Map* map, int x, int y);
   void UpdateCooldown();
   void Reset();
 

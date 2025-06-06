@@ -24,7 +24,7 @@ public:
 
 private:
   Context context;
-  Map map;
+  std::unique_ptr<Map> map;
   int seed;
   PowerManager powerManager;
   UIManager uiManager;

@@ -58,7 +58,7 @@ void Game::Run()
           if (cellX >= 0 && cellX < NB_CELL_ROW && cellY >= 0 &&
               cellY < NB_CELL_COLUMN) 
           {
-            powerManager.UseCurrentPower(map, cellX, cellY);
+            powerManager.UseCurrentPower(map.get(), cellX, cellY);
           }
       }
     }
@@ -68,8 +68,8 @@ void Game::Run()
     // Draw the map and in game UI
     if (context == C_Game)
     {
-      uiManager.Update(window, map, powerManager, this);
-      map.Draw(window);
+      uiManager.Update(window, map.get(), powerManager, this);
+      map->Draw(window);
     } 
     // Draw the main menu
     else if (context == C_MainMenu) 
@@ -88,7 +88,7 @@ void Game::Play()
 {
   context = C_Game;
   seed = time(nullptr);
-  map = Map{1, seed};
+  map = std::make_unique<Map>(1, seed);
   powerManager.Reset();
 }
 
@@ -96,4 +96,5 @@ void Game::End(int nbNatureCell)
 {
   context = C_MainMenu;
   mainMenu->nbNatureCell = nbNatureCell;
+  map.release();
 }

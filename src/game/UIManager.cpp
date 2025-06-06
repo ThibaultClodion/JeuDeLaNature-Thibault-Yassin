@@ -11,7 +11,7 @@ UIManager::UIManager(sf::RenderWindow& window)
   background.setFillColor(sf::Color::White);
 }
 
-void UIManager::Update(sf::RenderWindow& window, Map& map, PowerManager& powerManager, Game* game) 
+void UIManager::Update(sf::RenderWindow& window, Map* map, PowerManager& powerManager, Game* game) 
 {
   //Draw background
   window.draw(background);
@@ -25,26 +25,26 @@ void UIManager::Update(sf::RenderWindow& window, Map& map, PowerManager& powerMa
   ResetButtonStyle();
 }
 
-void UIManager::UpdateRoundWindow(Map& map, PowerManager& powerManager, Game* game) 
+void UIManager::UpdateRoundWindow(Map* map, PowerManager& powerManager, Game* game) 
 {
   ImGui::SetNextWindowPos(GetWindowPos());
   ImGui::SetNextWindowSize(GetWindowSize(3));
   ImGui::Begin("Round", nullptr, ImGuiWindowFlags_NoCollapse);
 
   ImGui::SetCursorPos(GetButtonPos(0));
-  ImGui::Text("Round: %d", map.GetRound());
+  ImGui::Text("Round: %d", map->GetRound());
   ImGui::SetCursorPos(GetButtonPos(1));
-  ImGui::Text("Nature Cells: %d", map.GetNbNatureCell());
+  ImGui::Text("Nature Cells: %d", map->GetNbNatureCell());
 
   ImGui::SetCursorPos(GetButtonPos(2));
   if (ImGui::Button("Next Generation", ImVec2(ButtonWidth, ButtonHeight))) 
   {
-    if (map.GetRound() == NB_ROUNDS)
+    if (map->GetRound() == NB_ROUNDS)
     {
-      game->End(map.GetNbNatureCell());
+      game->End(map->GetNbNatureCell());
     }
 
-    map.NextGeneration();
+    map->NextGeneration();
     powerManager.UpdateCooldown();
   }
 
@@ -55,7 +55,7 @@ void UIManager::UpdateRoundWindow(Map& map, PowerManager& powerManager, Game* ga
   ImGui::End();
 }
 
-void UIManager::UpdatePowerWindow(Map& map, PowerManager& powerManager) 
+void UIManager::UpdatePowerWindow(Map* map, PowerManager& powerManager) 
 {
   ImGui::SetNextWindowPos(ImVec2(GetWindowPos().x, GetButtonPos(3).y + 10));
   ImGui::SetNextWindowSize(GetWindowSize(6));

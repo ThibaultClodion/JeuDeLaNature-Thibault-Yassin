@@ -15,7 +15,7 @@ class Earthquake : public Power {
     maxCooldown = 7; 
   };
 
-  void Activate(Map& map, int x, int y) override 
+  void Activate(Map* map, int x, int y) override 
   {
     __super::Activate(map, x, y);  // Call the base class method to set cooldown
 
@@ -32,7 +32,7 @@ class Earthquake : public Power {
           {
             if (rand() % 4 != 0) 
             {
-              map.SetCell(nx, ny, std::make_unique<Nature>(nx, ny));
+              map->SetCell(nx, ny, std::make_unique<Nature>(nx, ny));
             }
           }
         }

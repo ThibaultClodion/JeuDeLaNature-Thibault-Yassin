@@ -7,7 +7,7 @@ class Power
  public:
   Power() = default;
 
-  virtual void Activate(Map& map, int x, int y) { cooldown = maxCooldown; };
+  virtual void Activate(Map* map, int x, int y) { cooldown = maxCooldown; };
 
   void UpdateCooldown() {
     if (cooldown > 0) {

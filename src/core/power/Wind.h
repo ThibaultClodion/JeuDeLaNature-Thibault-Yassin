@@ -14,7 +14,7 @@ class Wind : public Power {
     maxCooldown = 3;
   };
 
-  void Activate(Map& map, int x, int y) override 
+  void Activate(Map* map, int x, int y) override 
   {
     __super::Activate(map, x, y);  // Call the base class method to set cooldown
 
@@ -30,11 +30,11 @@ class Wind : public Power {
         int randInt = rand() % 3;
         if (randInt == 0)
         {
-          map.SetCell(nx, ny, std::make_unique<Nature>(nx, ny));
+          map->SetCell(nx, ny, std::make_unique<Nature>(nx, ny));
         } else if (randInt == 1) {
-          map.SetCell(nx, ny, std::make_unique<Field>(nx, ny));
+          map->SetCell(nx, ny, std::make_unique<Field>(nx, ny));
         } else {
-          map.SetCell(nx, ny, std::make_unique<Home>(nx, ny));
+          map->SetCell(nx, ny, std::make_unique<Home>(nx, ny));
         }
       }
     }
