@@ -6,21 +6,30 @@
 #include "Field.h"
 #include "Home.h"
 
-Map::Map(bool randomizeCenterSize, int seed) 
+Map::Map() 
 {
   grid.resize(NB_CELL_ROW);
 
   for (int i = 0; i < NB_CELL_ROW; ++i) 
   {
     grid[i].resize(NB_CELL_COLUMN);
+  }
+}
 
+void Map::Initialize(bool isRandom, int seed)
+{
+  round = 0;
+
+  for (int i = 0; i < NB_CELL_ROW; ++i)
+  {
     for (int j = 0; j < NB_CELL_COLUMN; ++j) 
     {
       grid[i][j] = std::make_unique<Nature>(i, j);
     }
   }
 
-  if (randomizeCenterSize) 
+  
+  if (isRandom) 
   {
     // TODO : add posibility to choose seed to replay the same randomization
     srand(seed);

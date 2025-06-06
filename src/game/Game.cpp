@@ -16,6 +16,7 @@ Game::Game()
 
   // Initialize the powers
   powerManager = std::make_unique<PowerManager>();
+  map = std::make_unique<Map>();
 
   // Initialize Main menu
   context = C_MainMenu;
@@ -88,7 +89,7 @@ void Game::Play()
 {
   context = C_Game;
   seed = time(nullptr);
-  map = std::make_unique<Map>(1, seed);
+  map->Initialize(true, seed);
   powerManager->Reset();
 }
 
