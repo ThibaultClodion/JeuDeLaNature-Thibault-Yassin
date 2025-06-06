@@ -1,4 +1,5 @@
 #include <random>
+#include <fstream>
 
 #include "Param.h"
 #include "Map.h"
@@ -13,6 +14,45 @@ Map::Map()
   for (int i = 0; i < NB_CELL_ROW; ++i) 
   {
     grid[i].resize(NB_CELL_COLUMN);
+  }
+}
+
+void Map::Initialize(const char* filename) 
+{
+  // TODO : resize grid with the width and height in text
+
+  // Extract file lines
+  std::ifstream file(filename);
+  std::string line;
+  std::vector<std::string> mapLines;
+
+  while (std::getline(file, line)) 
+  {
+    if (!line.empty()) mapLines.push_back(line);
+  }
+
+  // Fill the grid
+  int height = mapLines.size();
+  int width = (height > 0) ? mapLines[0].size() : 0;
+
+  for (int y = 0; y < height; ++y) 
+  {
+    for (int x = 0; x < width; ++x)
+    {
+      char cellChar = mapLines[y][x];
+      if (cellChar == 'F')
+      {
+        grid[x][y] = std::make_unique<Field>(x, y);
+      } 
+      else if (cellChar == 'H') 
+      {
+        grid[x][y] = std::make_unique<Home>(x, y);
+      }
+      else
+      {
+        grid[x][y] = std::make_unique<Nature>(x, y);
+      }
+    }
   }
 }
 

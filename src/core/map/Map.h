@@ -11,6 +11,7 @@ class Map
 public:
   Map();
   void Initialize(bool isRandom, int seed);
+  void Initialize(const char* filename);
   void Draw(sf::RenderWindow& window) const;
   
   void NextGeneration();

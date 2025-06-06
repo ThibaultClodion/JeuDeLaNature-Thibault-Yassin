@@ -89,7 +89,7 @@ void Game::Play()
 {
   context = C_Game;
   seed = time(nullptr);
-  map->Initialize(true, seed);
+  map->Initialize("resources/map_test.txt");
   powerManager->Reset();
 }
 
