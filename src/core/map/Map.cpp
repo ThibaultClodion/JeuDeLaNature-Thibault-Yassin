@@ -35,6 +35,8 @@ void Map::Initialize(bool isRandom, int seed)
     srand(seed);
     RandomizeGridCenter(RANDOM_EXTENSION_SIZE);
   }
+
+  ComputeNbNatureCell();
 }
 
 void Map::Draw(sf::RenderWindow& window) const 
@@ -58,13 +60,11 @@ void Map::SetCell(int x, int y, std::unique_ptr<Cell> cell)
   if (x < 0 || x >= NB_CELL_ROW || y < 0 || y >= NB_CELL_COLUMN) return;
 
   grid[x][y] = std::move(cell);
+  ComputeNbNatureCell();
 }
 
-int Map::GetNbNatureCell() const 
+void Map::ComputeNbNatureCell() 
 { 
-  // TODO : make a variable to store the number of nature cells and update it
-  // when a cell is changed (better performance)
-
   int count = 0;
   for (const auto& row : grid) {
     for (const auto& cell : row) {
@@ -73,7 +73,7 @@ int Map::GetNbNatureCell() const
       }
     }
   }
-  return count;
+  nbNatureCell = count;
 }
 
 void Map::NextGeneration() 
@@ -89,6 +89,7 @@ void Map::NextGeneration()
 
   grid = std::move(newGrid);
   ++round;
+  ComputeNbNatureCell();
 }
 
 int Map::CountNeighbors(int x, int y, CellType Type) 
