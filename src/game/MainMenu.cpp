@@ -17,12 +17,13 @@ void MainMenu::Update(sf::RenderWindow& window, Game* game)
   ImGui::SFML::Update(window, deltaClock.restart());
   ButtonStyle();
   UpdateButtons(game);
+  UpdateLastGameInformation(game);
   ResetButtonStyle();
 }
 
 void MainMenu::UpdateButtons(Game* game) 
 {
-  const int nbButtons = 4;
+  const int nbButtons = 3;
 
   ImGui::SetNextWindowSize(GetWindowSize(nbButtons));
   ImGui::SetNextWindowPos(GetWindowPos(ImGui::GetWindowSize()));
@@ -48,13 +49,45 @@ void MainMenu::UpdateButtons(Game* game)
     game->Quit();
   }
 
+  ImGui::End();
+}
+
+void MainMenu::UpdateLastGameInformation(Game* game)
+{
   if (nbNatureCell >= 0) 
   {
-    ImGui::SetCursorPos(GetButtonPos(3));
-    ImGui::Text("Nature cells saved : %d", nbNatureCell);
-  }
+    // Define the green background color
+    ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.0f, 0.3f, 0.2f, 0.8f));
 
-  ImGui::End();
+    // Measure text and define window size
+    const char* label = "Nature cells saved : %d          Seed used : %d";
+    char buffer[126];
+    snprintf(buffer, sizeof(buffer), label, nbNatureCell, game->GetSeed());
+
+    ImVec2 textSize = ImGui::CalcTextSize(buffer);
+    ImVec2 windowSize = ImVec2(textSize.x + 100, textSize.y + 40);
+
+    // Center the window on screen
+    ImGui::SetNextWindowSize(windowSize);
+    ImGui::SetNextWindowPos(ImVec2(WINDOW_WIDTH / 2.f - windowSize.x / 2.f, WINDOW_HEIGHT / 1.2f));
+
+    ImGui::Begin("Last Game Information", nullptr,
+                 ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
+                     ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse |
+                     ImGuiWindowFlags_NoScrollbar);
+
+    // Center horizontally and vertically
+    ImVec2 contentSize = ImGui::GetContentRegionAvail();
+    ImGui::SetCursorPosX((contentSize.x - textSize.x) * 0.5f);
+    ImGui::SetCursorPosY((contentSize.y - textSize.y) * 0.5f + 7);
+
+    ImGui::Text("%s", buffer);
+
+    ImGui::End();
+
+    // Pop the window background color
+    ImGui::PopStyleColor();
+  }
 }
 
 void MainMenu::ButtonStyle() 
@@ -80,7 +113,7 @@ ImVec2 MainMenu::GetWindowSize(int nbButtons) const
 ImVec2 MainMenu::GetWindowPos(ImVec2 windowSize) const 
 {
   return ImVec2((WINDOW_WIDTH - windowSize.x) / 2.f,
-                (WINDOW_HEIGHT - windowSize.y) / 2.f);
+                (WINDOW_HEIGHT - windowSize.y) / 2.f + 75);
 }
 
 ImVec2 MainMenu::GetButtonPos(int buttonIndex) const 

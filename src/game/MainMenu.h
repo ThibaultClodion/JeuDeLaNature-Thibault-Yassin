@@ -20,6 +20,7 @@ class MainMenu
 
  private:
   void UpdateButtons(Game* game);
+  void UpdateLastGameInformation(Game* game);
   void ButtonStyle();
   void ResetButtonStyle();
 

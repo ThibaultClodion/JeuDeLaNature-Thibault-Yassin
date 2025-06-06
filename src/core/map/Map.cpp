@@ -1,5 +1,4 @@
 #include <random>
-#include <ctime>
 
 #include "Param.h"
 #include "Map.h"
@@ -7,7 +6,7 @@
 #include "Field.h"
 #include "Home.h"
 
-Map::Map(bool randomizeCenterSize) 
+Map::Map(bool randomizeCenterSize, int seed) 
 {
   grid.resize(NB_CELL_ROW);
 
@@ -23,9 +22,8 @@ Map::Map(bool randomizeCenterSize)
 
   if (randomizeCenterSize) 
   {
-    // Randomize seed
     // TODO : add posibility to choose seed to replay the same randomization
-    srand(time(nullptr));
+    srand(seed);
     RandomizeGridCenter(RANDOM_EXTENSION_SIZE);
   }
 }

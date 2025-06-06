@@ -1,3 +1,5 @@
+#include <ctime>
+
 #include "Game.h"
 #include "Param.h"
 #include "UIManager.h"
@@ -85,7 +87,8 @@ void Game::Run()
 void Game::Play()
 {
   context = C_Game;
-  map = Map{1};
+  seed = time(nullptr);
+  map = Map{1, seed};
   powerManager.Reset();
 }
 

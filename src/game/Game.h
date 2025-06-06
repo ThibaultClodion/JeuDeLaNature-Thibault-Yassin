@@ -20,9 +20,12 @@ public:
   void End(int nbNatureCell);
   void Quit() { window.close(); };
 
+  int GetSeed() { return seed; };
+
 private:
   Context context;
   Map map;
+  int seed;
   PowerManager powerManager;
   UIManager uiManager;
   std::unique_ptr<MainMenu> mainMenu;
