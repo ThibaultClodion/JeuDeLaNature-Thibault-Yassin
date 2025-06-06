@@ -15,7 +15,7 @@ Game::Game()
   uiManager = UIManager(window);
 
   // Initialize the powers
-  powerManager = PowerManager();
+  powerManager = std::make_unique<PowerManager>();
 
   // Initialize Main menu
   context = C_MainMenu;
@@ -45,7 +45,7 @@ void Game::Run()
         window.setView(sf::View(visibleArea));
       }
 
-      if (event->is<sf::Event::MouseButtonPressed>()) 
+      if (event->is<sf::Event::MouseButtonPressed>() && context == C_Game) 
       {
           sf::Vector2i mousePos = sf::Mouse::getPosition(window);  // en pixels
           sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
@@ -58,7 +58,7 @@ void Game::Run()
           if (cellX >= 0 && cellX < NB_CELL_ROW && cellY >= 0 &&
               cellY < NB_CELL_COLUMN) 
           {
-            powerManager.UseCurrentPower(map.get(), cellX, cellY);
+            powerManager->UseCurrentPower(map.get(), cellX, cellY);
           }
       }
     }
@@ -68,7 +68,7 @@ void Game::Run()
     // Draw the map and in game UI
     if (context == C_Game)
     {
-      uiManager.Update(window, map.get(), powerManager, this);
+      uiManager.Update(window, map.get(), powerManager.get(), this);
       map->Draw(window);
     } 
     // Draw the main menu
@@ -89,12 +89,11 @@ void Game::Play()
   context = C_Game;
   seed = time(nullptr);
   map = std::make_unique<Map>(1, seed);
-  powerManager.Reset();
+  powerManager->Reset();
 }
 
 void Game::End(int nbNatureCell) 
 {
   context = C_MainMenu;
   mainMenu->nbNatureCell = nbNatureCell;
-  map.release();
 }

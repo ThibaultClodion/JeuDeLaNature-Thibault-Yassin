@@ -25,8 +25,8 @@ public:
 private:
   Context context;
   std::unique_ptr<Map> map;
+  std::unique_ptr<PowerManager> powerManager;
   int seed;
-  PowerManager powerManager;
   UIManager uiManager;
   std::unique_ptr<MainMenu> mainMenu;
   sf::RenderWindow window;

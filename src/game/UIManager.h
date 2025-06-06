@@ -15,11 +15,11 @@ class UIManager
   UIManager() = default;
   UIManager(sf::RenderWindow& window);
 
-  void Update(sf::RenderWindow& window, Map* map, PowerManager& powerManager, Game* game);
+  void Update(sf::RenderWindow& window, Map* map, PowerManager* powerManager, Game* game);
 
 private:
-  void UpdateRoundWindow(Map* map, PowerManager& powerManager, Game* game);
-  void UpdatePowerWindow(Map* map, PowerManager& powerManager);
+  void UpdateRoundWindow(Map* map, PowerManager* powerManager, Game* game);
+  void UpdatePowerWindow(Map* map, PowerManager* powerManager);
   void UpdateIndicationWindow();
   void ButtonStyle();
   void ResetButtonStyle();
