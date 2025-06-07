@@ -8,6 +8,8 @@
 
 class Game;
 
+enum Situation { S_Main, S_Options, S_MapChoose };
+
 class MainMenu 
 {
  public:
@@ -20,8 +22,9 @@ class MainMenu
 
  private:
   void DisplayMainButtons(Game* game);
-  void DisplayOptions();
   void DisplayLastGameInformation(Game* game);
+  void DisplayOptions();
+  void DisplayMapChoose(Game* game);
   void ButtonStyle();
   void ResetButtonStyle();
 
@@ -36,6 +39,6 @@ class MainMenu
   const int ButtonWidth = 200;
   const int ButtonHeight = 50;
   const int ButtonSpacing = 40;
-
-  bool inOptionMenu = false;
+  
+  Situation situation = S_Main;
 };

@@ -17,6 +17,7 @@ public:
   Game();
   void Run();
   void Play();
+  void Play(const char* filename);
   void End(int nbNatureCell);
   void Quit() { window.close(); };
 

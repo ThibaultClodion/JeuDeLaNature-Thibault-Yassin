@@ -17,14 +17,18 @@ void MainMenu::Update(sf::RenderWindow& window, Game* game)
   ImGui::SFML::Update(window, deltaClock.restart());
   ButtonStyle();
 
-  if (inOptionMenu)
-  {
-    DisplayOptions();
-  }
-  else
+  if (situation == S_Main)
   {
     DisplayMainButtons(game);
     DisplayLastGameInformation(game);
+  } 
+  else if (situation == S_Options)
+  {
+    DisplayOptions();
+  }
+  else if (situation == S_MapChoose)
+  {
+    DisplayMapChoose(game);
   }
 
   ResetButtonStyle();
@@ -32,7 +36,7 @@ void MainMenu::Update(sf::RenderWindow& window, Game* game)
 
 void MainMenu::DisplayMainButtons(Game* game) 
 {
-  const int nbButtons = 3;
+  const int nbButtons = 4;
 
   ImGui::SetNextWindowSize(GetWindowSize(nbButtons));
   ImGui::SetNextWindowPos(GetWindowPos(ImGui::GetWindowSize()));
@@ -49,16 +53,58 @@ void MainMenu::DisplayMainButtons(Game* game)
   }
 
   ImGui::SetCursorPos(GetButtonPos(1));
-  if (ImGui::Button("Options", ImVec2(ButtonWidth, ButtonHeight))) {
-    inOptionMenu = true;
+  if (ImGui::Button("Choose maps", ImVec2(ButtonWidth, ButtonHeight))) {
+    situation = S_MapChoose;
   }
 
   ImGui::SetCursorPos(GetButtonPos(2));
+  if (ImGui::Button("Options", ImVec2(ButtonWidth, ButtonHeight))) {
+    situation = S_Options;
+  }
+
+  ImGui::SetCursorPos(GetButtonPos(3));
   if (ImGui::Button("Quit", ImVec2(ButtonWidth, ButtonHeight))) {
     game->Quit();
   }
 
   ImGui::End();
+}
+
+void MainMenu::DisplayLastGameInformation(Game* game) {
+  if (nbNatureCell >= 0) {
+    // Define the green background color
+    ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.0f, 0.3f, 0.2f, 0.8f));
+
+    // Measure text and define window size
+    const char* label = "Nature cells saved : %d          Seed used : %d";
+    char buffer[126];
+    snprintf(buffer, sizeof(buffer), label, nbNatureCell, game->GetSeed());
+
+    ImVec2 textSize = ImGui::CalcTextSize(buffer);
+    ImVec2 windowSize = ImVec2(textSize.x + 100, textSize.y + 40);
+
+    // Center the window on screen
+    ImGui::SetNextWindowSize(windowSize);
+    ImGui::SetNextWindowPos(
+        ImVec2(WINDOW_WIDTH / 2.f - windowSize.x / 2.f, WINDOW_HEIGHT / 1.2f));
+
+    ImGui::Begin("Last Game Information", nullptr,
+                 ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
+                     ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse |
+                     ImGuiWindowFlags_NoScrollbar);
+
+    // Center horizontally and vertically
+    ImVec2 contentSize = ImGui::GetContentRegionAvail();
+    ImGui::SetCursorPosX((contentSize.x - textSize.x) * 0.5f);
+    ImGui::SetCursorPosY((contentSize.y - textSize.y) * 0.5f + 7);
+
+    ImGui::Text("%s", buffer);
+
+    ImGui::End();
+
+    // Pop the window background color
+    ImGui::PopStyleColor();
+  }
 }
 
 void MainMenu::DisplayOptions()
@@ -89,48 +135,47 @@ void MainMenu::DisplayOptions()
 
   if (ImGui::Button("Retour", ImVec2(100, 35))) 
   {
-    inOptionMenu = false;
+    situation = S_Main;
   }
 
   ImGui::End();
 }
 
-void MainMenu::DisplayLastGameInformation(Game* game)
+void MainMenu::DisplayMapChoose(Game* game)
 {
-  if (nbNatureCell >= 0) 
-  {
-    // Define the green background color
-    ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.0f, 0.3f, 0.2f, 0.8f));
+  const int nbButtons = 4;
 
-    // Measure text and define window size
-    const char* label = "Nature cells saved : %d          Seed used : %d";
-    char buffer[126];
-    snprintf(buffer, sizeof(buffer), label, nbNatureCell, game->GetSeed());
+  ImGui::SetNextWindowSize(GetWindowSize(nbButtons));
+  ImGui::SetNextWindowPos(GetWindowPos(ImGui::GetWindowSize()));
 
-    ImVec2 textSize = ImGui::CalcTextSize(buffer);
-    ImVec2 windowSize = ImVec2(textSize.x + 100, textSize.y + 40);
+  ImGui::Begin("Main Menu", nullptr,
+               ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
+                   ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse |
+                   ImGuiWindowFlags_NoScrollbar |
+                   ImGuiWindowFlags_NoBackground);
 
-    // Center the window on screen
-    ImGui::SetNextWindowSize(windowSize);
-    ImGui::SetNextWindowPos(ImVec2(WINDOW_WIDTH / 2.f - windowSize.x / 2.f, WINDOW_HEIGHT / 1.2f));
-
-    ImGui::Begin("Last Game Information", nullptr,
-                 ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
-                     ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse |
-                     ImGuiWindowFlags_NoScrollbar);
-
-    // Center horizontally and vertically
-    ImVec2 contentSize = ImGui::GetContentRegionAvail();
-    ImGui::SetCursorPosX((contentSize.x - textSize.x) * 0.5f);
-    ImGui::SetCursorPosY((contentSize.y - textSize.y) * 0.5f + 7);
-
-    ImGui::Text("%s", buffer);
-
-    ImGui::End();
-
-    // Pop the window background color
-    ImGui::PopStyleColor();
+  ImGui::SetCursorPos(GetButtonPos(0));
+  if (ImGui::Button("The field line", ImVec2(ButtonWidth, ButtonHeight))) {
+    game->Play("resources/map_test.txt");
+    situation = S_Main;
   }
+
+  ImGui::SetCursorPos(GetButtonPos(1));
+  if (ImGui::Button("Map 2", ImVec2(ButtonWidth, ButtonHeight))) {
+    // ..
+  }
+
+  ImGui::SetCursorPos(GetButtonPos(2));
+  if (ImGui::Button("Map 3", ImVec2(ButtonWidth, ButtonHeight))) {
+    // ..
+  }
+
+  ImGui::SetCursorPos(GetButtonPos(3));
+  if (ImGui::Button("Return", ImVec2(ButtonWidth, ButtonHeight))) {
+    situation = S_Main;
+  }
+
+  ImGui::End();
 }
 
 void MainMenu::ButtonStyle() 
@@ -156,7 +201,7 @@ ImVec2 MainMenu::GetWindowSize(int nbButtons) const
 ImVec2 MainMenu::GetWindowPos(ImVec2 windowSize) const 
 {
   return ImVec2((WINDOW_WIDTH - windowSize.x) / 2.f,
-                (WINDOW_HEIGHT - windowSize.y) / 2.f + 75);
+                (WINDOW_HEIGHT - windowSize.y) / 2.f);
 }
 
 ImVec2 MainMenu::GetButtonPos(int buttonIndex) const 
