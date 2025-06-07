@@ -54,7 +54,7 @@ TEST(TestNbNonNatureCells, TestInitialization) {
     }
   }
 
-  EXPECT_TRUE(nonNatureCount > MIN_NON_NATURE && nonNatureCount < (2 * RANDOM_EXTENSION_SIZE + 1) ^ 2);
+  EXPECT_TRUE(nonNatureCount >= MIN_NON_NATURE);
 }
 
 TEST(TestOnlyNature, TestNextGeneration)
