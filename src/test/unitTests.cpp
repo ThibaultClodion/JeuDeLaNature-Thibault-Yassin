@@ -1,14 +1,15 @@
 #include <gtest/gtest.h>
 
 #include "Param.h"
-#include "Map.h"
-#include "Nature.h"
-#include "Field.h"
-#include "Home.h"
+#include "map/Map.h"
+#include "map/Nature.h"
+#include "map/Field.h"
+#include "map/Home.h"
 
 TEST(TestNotRandomGeneration, TestInitialization) 
 { 
-  Map map{0};
+  Map map{};
+  map.Initialize(false, 0);
 
   for (int i = 0; i < NB_CELL_ROW; ++i) {
     for (int j = 0; j < NB_CELL_COLUMN; ++j) {
@@ -20,7 +21,8 @@ TEST(TestNotRandomGeneration, TestInitialization)
 
 TEST(TestSetCells, TestInitialization) 
 {
-  Map map{0};
+  Map map{};
+  map.Initialize(false, 0);
 
   // Set a cell to Field
   map.SetCell(0, 0, std::make_unique<Field>(0, 0));
@@ -39,7 +41,8 @@ TEST(TestSetCells, TestInitialization)
 }
 
 TEST(TestNbNonNatureCells, TestInitialization) {
-  Map map{1};
+  Map map;
+  map.Initialize(true, time(nullptr));
 
   int nonNatureCount = 0;
   for (int i = 0; i < NB_CELL_ROW; ++i) {
@@ -56,7 +59,8 @@ TEST(TestNbNonNatureCells, TestInitialization) {
 
 TEST(TestOnlyNature, TestNextGeneration)
 {
-  Map map{0};
+  Map map{};
+  map.Initialize(false, 0);
 
   map.NextGeneration();
 
@@ -70,7 +74,8 @@ TEST(TestOnlyNature, TestNextGeneration)
 
 TEST(TestStayNature, TestNextGeneration) 
 {
-  Map map{0};
+  Map map{};
+  map.Initialize(false, 0);
 
   map.SetCell(0, 1, std::make_unique<Field>(0, 1));
   map.SetCell(1, 0, std::make_unique<Home>(1, 0));
@@ -80,7 +85,8 @@ TEST(TestStayNature, TestNextGeneration)
 }
 
 TEST(TestChangeToFieldOrHome, TestNextGeneration) {
-  Map map{0};
+  Map map{};
+  map.Initialize(false, 0);
 
   map.SetCell(0, 1, std::make_unique<Field>(0, 1));
   map.SetCell(1, 0, std::make_unique<Home>(1, 0));
@@ -94,7 +100,8 @@ TEST(TestChangeToFieldOrHome, TestNextGeneration) {
 
 TEST(TestHomeAlone, TestNextGeneration) 
 {
-  Map map{0};
+  Map map{};
+  map.Initialize(false, 0);
 
   map.SetCell(1, 1, std::make_unique<Home>(1, 1));
   map.NextGeneration();
@@ -103,7 +110,8 @@ TEST(TestHomeAlone, TestNextGeneration)
 }
 
 TEST(TestFieldAlone, TestNextGeneration) {
-  Map map{0};
+  Map map{};
+  map.Initialize(false, 0);
 
   map.SetCell(1, 1, std::make_unique<Field>(1, 1));
   map.NextGeneration();
