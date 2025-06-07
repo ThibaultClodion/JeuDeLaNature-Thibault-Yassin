@@ -16,16 +16,23 @@ void MainMenu::Update(sf::RenderWindow& window, Game* game)
   // Update UI
   ImGui::SFML::Update(window, deltaClock.restart());
   ButtonStyle();
-  UpdateButtons(game);
-  UpdateLastGameInformation(game);
+
+  if (inOptionMenu)
+  {
+    DisplayOptions();
+  }
+  else
+  {
+    DisplayMainButtons(game);
+    DisplayLastGameInformation(game);
+  }
+
   ResetButtonStyle();
 }
 
-void MainMenu::UpdateButtons(Game* game) 
+void MainMenu::DisplayMainButtons(Game* game) 
 {
   const int nbButtons = 3;
-
-  static bool showOptions = false;
 
   ImGui::SetNextWindowSize(GetWindowSize(nbButtons));
   ImGui::SetNextWindowPos(GetWindowPos(ImGui::GetWindowSize()));
@@ -43,7 +50,7 @@ void MainMenu::UpdateButtons(Game* game)
 
   ImGui::SetCursorPos(GetButtonPos(1));
   if (ImGui::Button("Options", ImVec2(ButtonWidth, ButtonHeight))) {
-    showOptions = true;
+    inOptionMenu = true;
   }
 
   ImGui::SetCursorPos(GetButtonPos(2));
@@ -51,41 +58,44 @@ void MainMenu::UpdateButtons(Game* game)
     game->Quit();
   }
 
-  if (showOptions) {
-    static char seedInput[32] = "";
-    static float volume = 50.0f;
+  ImGui::End();
+}
 
-    ImVec2 optionSize(400, 200);
-    ImVec2 optionPos(WINDOW_WIDTH / 2.f - optionSize.x / 2.f,
-                  WINDOW_HEIGHT / 2.f - optionSize.y / 2.f);
+void MainMenu::DisplayOptions()
+{
+  static char seedInput[32] = "";
+  static float volume = 50.0f;
 
-    ImGui::SetNextWindowSize(optionSize);
-    ImGui::SetNextWindowPos(optionPos);
+  ImVec2 optionSize(400, 200);
+  ImVec2 optionPos(WINDOW_WIDTH / 2.f - optionSize.x / 2.f,
+                   WINDOW_HEIGHT / 2.f - optionSize.y / 2.f);
 
-    ImGui::Begin("Options", nullptr,
-                 ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
-                 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar);
+  ImGui::SetNextWindowSize(optionSize);
+  ImGui::SetNextWindowPos(optionPos);
 
-    ImGui::Text("Enter custom seed (Nothing for a random seed):");
-    ImGui::InputText("##SeedInput", seedInput, IM_ARRAYSIZE(seedInput));
+  ImGui::Begin("Options", nullptr,
+               ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
+                   ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar);
 
-    ImGui::Spacing();
-    ImGui::Text("Sound volume:");
-    ImGui::SliderFloat("##VolumeSlider", &volume, 0.0f, 100.0f, "%.1f");
+  ImGui::Text("Enter custom seed (Nothing for a random seed):");
+  ImGui::InputText("##SeedInput", seedInput, IM_ARRAYSIZE(seedInput));
 
-    ImGui::Spacing();
-    ImGui::SetCursorPosX((optionSize.x - 100) * 0.5f);
-    if (ImGui::Button("Retour", ImVec2(100, 35))) {
-      showOptions = false;
-    }
+  ImGui::Spacing();
+  ImGui::Text("Sound volume:");
+  ImGui::SliderFloat("##VolumeSlider", &volume, 0.0f, 100.0f, "%.1f");
 
-    ImGui::End();
+  ImGui::Spacing();
+  ImGui::SetCursorPosX((optionSize.x - 100) * 0.5f);
+
+  if (ImGui::Button("Retour", ImVec2(100, 35))) 
+  {
+    inOptionMenu = false;
   }
 
   ImGui::End();
 }
 
-void MainMenu::UpdateLastGameInformation(Game* game)
+void MainMenu::DisplayLastGameInformation(Game* game)
 {
   if (nbNatureCell >= 0) 
   {

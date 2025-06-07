@@ -17,11 +17,11 @@ class MainMenu
   void Update(sf::RenderWindow& window, Game* game);
 
   int nbNatureCell = -1;
-  void displayOptions();
 
  private:
-  void UpdateButtons(Game* game);
-  void UpdateLastGameInformation(Game* game);
+  void DisplayMainButtons(Game* game);
+  void DisplayOptions();
+  void DisplayLastGameInformation(Game* game);
   void ButtonStyle();
   void ResetButtonStyle();
 
@@ -36,4 +36,6 @@ class MainMenu
   const int ButtonWidth = 200;
   const int ButtonHeight = 50;
   const int ButtonSpacing = 40;
+
+  bool inOptionMenu = false;
 };
