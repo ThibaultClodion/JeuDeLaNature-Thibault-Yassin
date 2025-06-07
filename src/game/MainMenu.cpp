@@ -25,6 +25,8 @@ void MainMenu::UpdateButtons(Game* game)
 {
   const int nbButtons = 3;
 
+  static bool showOptions = false;
+
   ImGui::SetNextWindowSize(GetWindowSize(nbButtons));
   ImGui::SetNextWindowPos(GetWindowPos(ImGui::GetWindowSize()));
 
@@ -41,12 +43,43 @@ void MainMenu::UpdateButtons(Game* game)
 
   ImGui::SetCursorPos(GetButtonPos(1));
   if (ImGui::Button("Options", ImVec2(ButtonWidth, ButtonHeight))) {
-    // Option logic
+    showOptions = true;
   }
 
   ImGui::SetCursorPos(GetButtonPos(2));
   if (ImGui::Button("Quit", ImVec2(ButtonWidth, ButtonHeight))) {
     game->Quit();
+  }
+
+  if (showOptions) {
+    static char seedInput[32] = "";
+    static float volume = 50.0f;
+
+    ImVec2 optionSize(400, 200);
+    ImVec2 optionPos(WINDOW_WIDTH / 2.f - optionSize.x / 2.f,
+                  WINDOW_HEIGHT / 2.f - optionSize.y / 2.f);
+
+    ImGui::SetNextWindowSize(optionSize);
+    ImGui::SetNextWindowPos(optionPos);
+
+    ImGui::Begin("Options", nullptr,
+                 ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
+                 ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar);
+
+    ImGui::Text("Enter custom seed (Nothing for a random seed):");
+    ImGui::InputText("##SeedInput", seedInput, IM_ARRAYSIZE(seedInput));
+
+    ImGui::Spacing();
+    ImGui::Text("Sound volume:");
+    ImGui::SliderFloat("##VolumeSlider", &volume, 0.0f, 100.0f, "%.1f");
+
+    ImGui::Spacing();
+    ImGui::SetCursorPosX((optionSize.x - 100) * 0.5f);
+    if (ImGui::Button("Retour", ImVec2(100, 35))) {
+      showOptions = false;
+    }
+
+    ImGui::End();
   }
 
   ImGui::End();
