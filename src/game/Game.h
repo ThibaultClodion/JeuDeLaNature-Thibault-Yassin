@@ -22,6 +22,7 @@ public:
   void Quit() { window.close(); };
 
   int GetSeed() { return seed; };
+  void SetSeed(int seed) { this->seed = seed; };
 
 private:
   Context context;
