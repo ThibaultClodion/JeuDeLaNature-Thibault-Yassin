@@ -1,5 +1,7 @@
 #pragma once
 
+#include "SFML/Audio/Sound.hpp"
+#include "SFML/Audio/SoundBuffer.hpp"
 #include "map/Map.h"
 
 class Power
@@ -19,4 +21,6 @@ class Power
 protected:
   int cooldown = 0;
   int maxCooldown = 1;
+  sf::SoundBuffer buffer;
+  sf::Sound sound;
 };

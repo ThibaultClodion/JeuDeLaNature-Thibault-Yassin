@@ -10,6 +10,8 @@ class Sunlight : public Power {
   Sunlight() {
     cooldown = 7;
     maxCooldown = 5;
+    buffer.loadFromFile("resources/Sunlight.mp3");
+    sound.setBuffer(buffer);
   };
 
   void Activate(Map* map, int x, int y) override 
@@ -28,5 +30,6 @@ class Sunlight : public Power {
         map->SetCell(x, i, std::make_unique<Nature>(x, i));
       }
     }
+    sound.play();
   }
 };

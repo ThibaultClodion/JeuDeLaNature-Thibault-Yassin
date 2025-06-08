@@ -12,7 +12,9 @@ class Earthquake : public Power {
   Earthquake() 
   { 
     cooldown = 10;
-    maxCooldown = 7; 
+    maxCooldown = 7;
+    buffer.loadFromFile("resources/Earthquake.mp3");
+    sound.setBuffer(buffer);
   };
 
   void Activate(Map* map, int x, int y) override 
@@ -38,6 +40,7 @@ class Earthquake : public Power {
         }
       }
     }
+    sound.play();
   }
 
 private:
