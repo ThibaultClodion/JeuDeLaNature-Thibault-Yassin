@@ -4,7 +4,10 @@
 MainMenu::MainMenu(sf::RenderWindow& window) 
 {
   // Define background
-  backgroundTexture.loadFromFile("resources/main_menu.png");
+  if (!backgroundTexture.loadFromFile("resources/main_menu.png")) 
+  {
+    throw std::runtime_error("Failed to initialize main menu background");
+  }
 }
 
 void MainMenu::Update(sf::RenderWindow& window, Game* game)

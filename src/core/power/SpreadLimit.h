@@ -4,11 +4,9 @@
 
 class SpreadLimit : public Power {
  public:
-  SpreadLimit() {
+  SpreadLimit() : Power("resources/SpreadLimit.mp3") {
     cooldown = 3;
     maxCooldown = 10;
-    buffer.loadFromFile("resources/SpreadLimit.mp3");
-    sound.setBuffer(buffer);
   };
 
   void Activate(Map* map, int x, int y) override 
@@ -22,6 +20,5 @@ class SpreadLimit : public Power {
         }
       }
     }
-    sound.play();
   }
 };

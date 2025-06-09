@@ -9,11 +9,9 @@
 
 class Wind : public Power {
  public:
-  Wind() {
+  Wind() : Power("resources/SpreadLimit.mp3"){
     cooldown = 5;
     maxCooldown = 3;
-    buffer.loadFromFile("resources/SpreadLimit.mp3");
-    sound.setBuffer(buffer);
   };
 
   void Activate(Map* map, int x, int y) override 
@@ -40,6 +38,5 @@ class Wind : public Power {
         }
       }
     }
-    sound.play();
   }
 };

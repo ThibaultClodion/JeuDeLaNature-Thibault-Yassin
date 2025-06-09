@@ -7,9 +7,21 @@
 class Power
 {
  public:
-  Power() = default;
+  Power(const char* filename) 
+  { 
+    if (!buffer.loadFromFile(filename))
+    {
+      throw std::runtime_error("Failed to load sound filename");
+    }
+  };
 
-  virtual void Activate(Map* map, int x, int y) { cooldown = maxCooldown; };
+  virtual void Activate(Map* map, int x, int y) 
+  { 
+    cooldown = maxCooldown;
+
+    sf::Sound sound = sf::Sound(buffer);
+    sound.play();
+  };
 
   void UpdateCooldown() {
     if (cooldown > 0) {
@@ -22,5 +34,4 @@ protected:
   int cooldown = 0;
   int maxCooldown = 1;
   sf::SoundBuffer buffer;
-  sf::Sound sound;
 };
