@@ -11,4 +11,4 @@ add_library(lib_core Param.h
 "power/Wind.h")
 
 target_include_directories(lib_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(lib_core PUBLIC sfml-graphics)
+target_link_libraries(lib_core PUBLIC sfml-graphics sfml-audio)
