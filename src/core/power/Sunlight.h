@@ -20,7 +20,7 @@ class Sunlight : public Power {
     {
       if (map->GetCell(i, y)->GetType() == CT_Field) 
       {
-        map->SetCell(i, x, std::make_unique<Nature>(i, x));
+        map->SetCell(i, y, std::make_unique<Nature>(i, y));
       }
 
       if (map->GetCell(x, i)->GetType() == CT_Field)
