@@ -6,7 +6,7 @@ class Freeze : public Power
 {
 
 public:
-  Freeze() : Power("resources/Freeze.mp3") 
+  Freeze() : Power("resources/powers/Freeze.mp3") 
   { maxCooldown = 1; };
 
   void Activate(Map* map, int x, int y) override 

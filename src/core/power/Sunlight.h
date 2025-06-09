@@ -7,7 +7,7 @@
 
 class Sunlight : public Power {
  public:
-  Sunlight() : Power("resources/Sunlight.mp3") {
+  Sunlight() : Power("resources/powers/Sunlight.mp3") {
     cooldown = 7;
     maxCooldown = 5;
   };

@@ -5,7 +5,7 @@
 sf::Texture Home::GetTexture() 
 {
   if (texture.getSize().x == 0) {
-    if (!texture.loadFromFile("resources/house.png")) {
+    if (!texture.loadFromFile("resources/map/house.png")) {
       throw std::runtime_error("Failed to load texture for Home cell");
     }
   }

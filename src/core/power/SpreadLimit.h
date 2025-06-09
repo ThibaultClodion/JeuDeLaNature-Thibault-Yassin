@@ -4,7 +4,7 @@
 
 class SpreadLimit : public Power {
  public:
-  SpreadLimit() : Power("resources/SpreadLimit.mp3") {
+  SpreadLimit() : Power("resources/powers/SpreadLimit.mp3") {
     cooldown = 3;
     maxCooldown = 10;
   };

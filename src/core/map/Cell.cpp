@@ -32,7 +32,7 @@ void Cell::Freeze()
 
   // Load the frozen texture if it hasn't been loaded yet
   if (frozenTexture.getSize().x == 0) {
-    if (!frozenTexture.loadFromFile("resources/snowflake.png")) {
+    if (!frozenTexture.loadFromFile("resources/powers/snowflake.png")) {
       throw std::runtime_error("Failed to load frozen texture");
     }
   }

@@ -4,7 +4,7 @@
 MainMenu::MainMenu(sf::RenderWindow& window) 
 {
   // Define background
-  if (!backgroundTexture.loadFromFile("resources/main_menu.png")) 
+  if (!backgroundTexture.loadFromFile("resources/menu/main_menu.png")) 
   {
     throw std::runtime_error("Failed to initialize main menu background");
   }
@@ -156,7 +156,7 @@ void MainMenu::DisplayMapChoose(Game* game)
 
   ImGui::SetCursorPos(GetButtonPos(0));
   if (ImGui::Button("The field line", ImVec2(ButtonWidth, ButtonHeight))) {
-    game->Play("resources/map_test.txt");
+    game->Play("resources/levels/map_test.txt");
     situation = S_Main;
   }
 

@@ -6,7 +6,7 @@ sf::Texture Field::GetTexture()
 {
   if (texture.getSize().x == 0) {
     int randomInt = rand() % 4 + 1;  // Randomly choose between 1 and 2
-    if (!texture.loadFromFile("resources/grass_" + std::to_string(randomInt) +
+    if (!texture.loadFromFile("resources/map/grass_" + std::to_string(randomInt) +
                               ".png")) {
       throw std::runtime_error("Failed to load texture for Field cell");
     }

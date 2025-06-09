@@ -9,7 +9,7 @@
 
 class Earthquake : public Power {
  public:
-  Earthquake() : Power("resources/Earthquake.mp3")
+  Earthquake() : Power("resources/powers/Earthquake.mp3")
   { 
     cooldown = 10;
     maxCooldown = 7;

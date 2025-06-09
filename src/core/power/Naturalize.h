@@ -5,7 +5,7 @@
 
 class Naturalize : public Power {
  public:
-  Naturalize() : Power("resources/Naturalize.mp3") {
+  Naturalize() : Power("resources/powers/Naturalize.mp3") {
     cooldown = 1;
     maxCooldown = 2;
   };

@@ -9,7 +9,7 @@
 
 class Wind : public Power {
  public:
-  Wind() : Power("resources/SpreadLimit.mp3"){
+  Wind() : Power("resources/powers/SpreadLimit.mp3"){
     cooldown = 5;
     maxCooldown = 3;
   };

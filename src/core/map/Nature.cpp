@@ -7,7 +7,7 @@ sf::Texture Nature::GetTexture()
 {
   if (texture.getSize().x == 0) {
     int randomInt = rand() % 2 + 1;  // Randomly choose between 1 and 2
-    if (!texture.loadFromFile("resources/tree_" + std::to_string(randomInt) +
+    if (!texture.loadFromFile("resources/map/tree_" + std::to_string(randomInt) +
                               ".png")) {
       throw std::runtime_error("Failed to load texture for Nature cell");
     }
