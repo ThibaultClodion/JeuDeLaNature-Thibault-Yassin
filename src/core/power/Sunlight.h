@@ -14,7 +14,7 @@ class Sunlight : public Power {
 
   void Activate(Map* map, int x, int y) override 
   {
-    __super::Activate(map, x, y);  // Call the base class method to set cooldown
+    __super::Activate(map, x, y);
 
     for (int i = 0; i < NB_CELL_COLUMN; i++)
     {
