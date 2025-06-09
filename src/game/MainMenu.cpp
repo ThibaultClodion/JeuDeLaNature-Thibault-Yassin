@@ -156,26 +156,34 @@ void MainMenu::DisplayMapChoose(Game* game)
 
   ImGui::SetCursorPos(GetButtonPos(0));
   if (ImGui::Button("The field line", ImVec2(ButtonWidth, ButtonHeight))) {
-    game->Play("resources/levels/map_test.txt");
+    game->Play("resources/levels/map_field_line.txt");
     situation = S_Main;
   }
 
   ImGui::SetCursorPos(GetButtonPos(1));
-  if (ImGui::Button("Map 2", ImVec2(ButtonWidth, ButtonHeight))) {
-    // ..
+  if (ImGui::Button("Town", ImVec2(ButtonWidth, ButtonHeight))) {
+    game->Play("resources/levels/map_town.txt");
+    situation = S_Main;
   }
 
   ImGui::SetCursorPos(GetButtonPos(2));
-  if (ImGui::Button("Map 3", ImVec2(ButtonWidth, ButtonHeight))) {
-    // ..
+  if (ImGui::Button("Surrounded", ImVec2(ButtonWidth, ButtonHeight))) {
+    game->Play("resources/levels/map_surround.txt");
+    situation = S_Main;
   }
 
   ImGui::SetCursorPos(GetButtonPos(3));
-  if (ImGui::Button("Return", ImVec2(ButtonWidth, ButtonHeight))) {
+  if (ImGui::Button("Corner", ImVec2(ButtonWidth, ButtonHeight))) {
+    game->Play("resources/levels/map_corner.txt");
     situation = S_Main;
   }
 
   ImGui::SetCursorPos(GetButtonPos(4));
+  if (ImGui::Button("Return", ImVec2(ButtonWidth, ButtonHeight))) {
+    situation = S_Main;
+  }
+
+  /*ImGui::SetCursorPos(GetButtonPos(4));
   ImGui::Text("Enter custom seed (Nothing for a random seed):");
   ImGui::SetCursorPosX(ButtonWidth / 2.f);
   ImGui::InputText("##SeedInput", seedInput, IM_ARRAYSIZE(seedInput));
@@ -187,7 +195,7 @@ void MainMenu::DisplayMapChoose(Game* game)
 
   if (enteredSeed != -1) {
     game->SetSeed(enteredSeed);
-  }
+  }*/
 
   ImGui::End();
 }

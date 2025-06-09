@@ -19,7 +19,7 @@ Map::Map()
 
 void Map::Initialize(const char* filename) 
 {
-  // TODO : resize grid with the width and height in text
+  round = 0;
 
   // Extract file lines
   std::ifstream file(filename);
@@ -54,6 +54,8 @@ void Map::Initialize(const char* filename)
       }
     }
   }
+
+  ComputeNbNatureCell();
 }
 
 void Map::Initialize(bool isRandom, int seed)
@@ -71,7 +73,6 @@ void Map::Initialize(bool isRandom, int seed)
   
   if (isRandom) 
   {
-    // TODO : add posibility to choose seed to replay the same randomization
     srand(seed);
     RandomizeGridCenter(RANDOM_EXTENSION_SIZE);
   }
