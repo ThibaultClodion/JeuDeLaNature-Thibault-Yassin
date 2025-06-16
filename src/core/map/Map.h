@@ -23,6 +23,19 @@ public:
   int GetRound() const { return round; }
   int GetNbNatureCell() const { return nbNatureCell; };
 
+  template<typename T>
+  int CountCellType() const {
+    int count = 0;
+    for (const auto& row : grid) {
+      for (const auto& cell : row) {
+        if (dynamic_cast<T*>(cell.get())) {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
 
 private:
   void RandomizeGridCenter(int randomSize);

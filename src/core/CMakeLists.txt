@@ -8,7 +8,13 @@ add_library(lib_core Param.h
 "power/Power.h" "power/Freeze.h" 
 "power/Naturalize.h" "power/Earthquake.h" 
 "power/SpreadLimit.h" "power/Sunlight.h" 
-"power/Wind.h")
+"power/Wind.h"
+        Events/RandomEvent.h
+        Events/RandomEventManager.cpp
+        Events/RandomEventManager.h
+        Events/Firestorm.h
+        Events/Famine.h
+        Events/Rotten.h)
 
 target_include_directories(lib_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(lib_core PUBLIC sfml-graphics sfml-audio)
