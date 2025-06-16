@@ -52,7 +52,7 @@ void MainMenu::DisplayMainButtons(Game* game)
 
   ImGui::SetCursorPos(GetButtonPos(0));
   if (ImGui::Button("Play", ImVec2(ButtonWidth, ButtonHeight))) {
-    game->Play();
+    game->SetContext(C_SeedSelection);
   }
 
   ImGui::SetCursorPos(GetButtonPos(1));

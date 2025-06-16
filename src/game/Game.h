@@ -6,8 +6,9 @@
 #include "UIManager.h"
 #include "MainMenu.h"
 #include "power/PowerManager.h"
+#include "SeedSelection.h"
 
-enum Context { C_MainMenu, C_Game };
+enum Context { C_MainMenu, C_Game, C_SeedSelection };
 
 
 class Game
@@ -19,7 +20,9 @@ public:
   void Play();
   void Play(const char* filename);
   void End(int nbNatureCell);
-  void Quit() { window.close(); };
+  void Quit() { window.close(); }
+  void SetContext(Context context);
+  ;
 
   int GetSeed() { return seed; };
   void SetSeed(int seed) { this->seed = seed; };
@@ -32,4 +35,5 @@ private:
   UIManager uiManager;
   std::unique_ptr<MainMenu> mainMenu;
   sf::RenderWindow window;
+  std::unique_ptr<SeedSelection> seedSelection;
 };
