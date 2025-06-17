@@ -46,11 +46,6 @@ void UIManager::UpdateRoundWindow(Map* map, PowerManager* powerManager, Game* ga
 
     map->NextGeneration();
     powerManager->UpdateCooldown();
-    game->GetRandomEventManager()->Update(map);
-    if (game->GetRandomEventManager()->GetHappened()) {
-      DisplayEventNotification();
-    }
-    game->GetRandomEventManager()->SetHappened();
   }
 
   if (ImGui::IsItemHovered()) {
@@ -178,21 +173,4 @@ void UIManager::ButtonStyle() {
 void UIManager::ResetButtonStyle() {
   ImGui::PopStyleColor(6);
   ImGui::PopStyleVar();
-}
-
-void UIManager::DisplayEventNotification()
-{
-  const char* eventInfo = "An event !";
-
-  ImGui::SetNextWindowBgAlpha(0.4f); // transparence du fond
-  ImGui::SetNextWindowPos(ImVec2(10, 10), ImGuiCond_Always);
-  ImGui::Begin("Event Info", nullptr,
-               ImGuiWindowFlags_NoTitleBar |
-               ImGuiWindowFlags_AlwaysAutoResize |
-               ImGuiWindowFlags_NoMove |
-               ImGuiWindowFlags_NoSavedSettings);
-
-  ImGui::Text(eventInfo);
-
-  ImGui::End();
 }

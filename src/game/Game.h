@@ -26,13 +26,10 @@ public:
   int GetSeed() { return seed; };
   void SetSeed(int seed) { this->seed = seed; };
 
-  RandomEventManager* GetRandomEventManager() const { return randomEventManager.get(); }
-
 private:
   Context context;
   std::unique_ptr<Map> map;
   std::unique_ptr<PowerManager> powerManager;
-  std::unique_ptr<RandomEventManager> randomEventManager;
   int seed;
   UIManager uiManager;
   std::unique_ptr<MainMenu> mainMenu;
