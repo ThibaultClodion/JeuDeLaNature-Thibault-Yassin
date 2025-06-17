@@ -88,9 +88,6 @@ void Game::Run()
 void Game::Play()
 {
   context = C_Game;
-  /*if (seed == -1) {
-    seed = time(nullptr);
-  }*/
   map->Initialize(true, seed);
   powerManager->Reset();
 }
