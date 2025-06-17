@@ -111,7 +111,7 @@ void Map::NextGeneration()
   for (int i = 0; i < NB_CELL_ROW; ++i) {
     newGrid[i].resize(NB_CELL_COLUMN);
     for (int j = 0; j < NB_CELL_COLUMN; ++j) {
-      newGrid[i][j] = grid[i][j]->nextGeneration(*this);
+      newGrid[i][j] = grid[i][j]->NextGeneration(*this);
     }
   }
 

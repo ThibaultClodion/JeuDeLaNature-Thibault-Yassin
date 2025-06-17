@@ -11,6 +11,6 @@ public:
   sf::Texture GetTexture() override;
   CellType GetType() const override { return CellType::CT_Nature; };
 
-  std::unique_ptr<Cell> nextGeneration(Map& map) override;
+  std::unique_ptr<Cell> NextGeneration(Map& map) override;
 
 };

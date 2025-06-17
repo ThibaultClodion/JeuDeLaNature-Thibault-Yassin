@@ -15,7 +15,7 @@ sf::Texture Field::GetTexture()
   return texture;
 }
 
-std::unique_ptr<Cell> Field::nextGeneration(Map& map) {
+std::unique_ptr<Cell> Field::NextGeneration(Map& map) {
   if (isFrozen) return std::make_unique<Field>(x, y);
 
   int nbNature = map.CountNeighbors(x, y, CT_Nature);

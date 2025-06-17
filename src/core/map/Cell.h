@@ -18,7 +18,7 @@ public:
   virtual sf::Texture GetTexture() = 0;
   virtual CellType GetType() const = 0;
   void Draw(sf::RenderWindow& window);
-  virtual std::unique_ptr<Cell> nextGeneration(class Map& map) = 0;
+  virtual std::unique_ptr<Cell> NextGeneration(class Map& map) = 0;
 
   void Freeze();
   void Limit() { isLimited = true; }

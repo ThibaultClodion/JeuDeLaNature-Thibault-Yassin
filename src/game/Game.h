@@ -22,7 +22,6 @@ public:
   void End(int nbNatureCell);
   void Quit() { window.close(); }
   void SetContext(Context context);
-  ;
 
   int GetSeed() { return seed; };
   void SetSeed(int seed) { this->seed = seed; };

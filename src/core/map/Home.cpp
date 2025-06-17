@@ -13,7 +13,7 @@ sf::Texture Home::GetTexture()
   return texture;
 }
 
-std::unique_ptr<Cell> Home::nextGeneration(Map& map) {
+std::unique_ptr<Cell> Home::NextGeneration(Map& map) {
   if (isFrozen) return std::make_unique<Home>(x, y);
 
   int nbNature = map.CountNeighbors(x, y, CT_Nature);

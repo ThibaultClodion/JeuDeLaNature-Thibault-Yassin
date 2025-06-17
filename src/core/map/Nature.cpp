@@ -16,7 +16,7 @@ sf::Texture Nature::GetTexture()
   return texture;
 }
 
-std::unique_ptr<Cell> Nature::nextGeneration(Map& map) {
+std::unique_ptr<Cell> Nature::NextGeneration(Map& map) {
 
   if (isFrozen) return std::make_unique<Nature>(x, y);
 
