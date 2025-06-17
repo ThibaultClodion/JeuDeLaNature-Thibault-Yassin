@@ -5,8 +5,6 @@
 #include "power/Power.h"
 #include "Param.h"
 
-#include <iostream>
-
 class Earthquake : public Power {
  public:
   Earthquake() : Power("resources/powers/Earthquake.mp3")

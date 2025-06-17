@@ -11,7 +11,7 @@ class Power
   { 
     if (!buffer.loadFromFile(filename))
     {
-      //throw std::runtime_error("Failed to load sound filename");
+      throw std::runtime_error("Failed to load sound filename");
     }
   };
 
@@ -19,8 +19,8 @@ class Power
   { 
     cooldown = maxCooldown;
 
-    /* sf::Sound sound = sf::Sound(buffer);
-    sound.play();*/
+    sf::Sound sound = sf::Sound(buffer);
+    sound.play();
   };
 
   void UpdateCooldown() {
