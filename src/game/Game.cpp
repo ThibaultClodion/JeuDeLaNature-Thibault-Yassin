@@ -15,6 +15,7 @@ Game::Game()
 
   // Initialize the powers
   powerManager = std::make_unique<PowerManager>();
+  randomEventManager = std::make_unique<RandomEventManager>();
   map = std::make_unique<Map>();
   seed = -1;
 

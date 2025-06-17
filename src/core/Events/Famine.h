@@ -16,8 +16,6 @@ class Famine : public RandomEvent {
 public:
   Famine() = default;
 
-  void Trigger(Map* map) override { Activate(map); }
-
   void Activate(Map* map) override {
 
     std::cout << "Famine triggered\n";

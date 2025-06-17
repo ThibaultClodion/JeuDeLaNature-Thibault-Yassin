@@ -31,8 +31,6 @@ public:
 
   virtual const char* GetName() const = 0;
 
-  virtual void Trigger(Map* map) = 0;
-
   float GetProbability() const { return probability; }
 
 protected:

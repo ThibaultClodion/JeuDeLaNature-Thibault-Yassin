@@ -46,6 +46,7 @@ void UIManager::UpdateRoundWindow(Map* map, PowerManager* powerManager, Game* ga
 
     map->NextGeneration();
     powerManager->UpdateCooldown();
+    game->GetRandomEventManager()->Update(map);
   }
 
   if (ImGui::IsItemHovered()) {

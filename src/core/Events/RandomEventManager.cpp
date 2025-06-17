@@ -14,7 +14,7 @@ RandomEventManager::RandomEventManager() {
   events.push_back(std::make_unique<Rotten>());
 }
 
-void RandomEventManager::Update(Map* map, float gameTime, float natureRatio) {
+void RandomEventManager::Update(Map* map) {
   std::vector<std::pair<RandomEvent*, float>> weightedEvents;
 
   for (auto& event : events) {

@@ -18,7 +18,7 @@ class RandomEventManager {
 public:
   RandomEventManager();
 
-  void Update(Map* map, float gameTime, float natureRatio); // To call each frame
+  void Update(Map* map); // To call each frame
 
 private:
   std::vector<std::unique_ptr<RandomEvent>> events;
