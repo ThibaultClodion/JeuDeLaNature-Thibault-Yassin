@@ -15,10 +15,10 @@ La prise en main du jeu est plutôt simple car tout ce fait à l'aide d'UI et de
 Il y a 2 modes de jeu :
 - Play : jouer à une carte généré aléatoirement
 - Challenge : jouer à une map prédéfinie
-![Aperçu du menu principal](resources/illustrations/main_menu)
+![Aperçu du menu principal](resources/illustrations/main_menu.png)
 
 Une fois en jeu, il y a 3 sous-menu pour jouer au jeu :
 - Round : Affiche les données du jeu + un bouton next generation pour aller à la génération suivante.
 - Power : Survoler un pouvoir pour connaître son utilité. Appuyer dessus et sélectionner une case pour l'activer sur cette case.
 - Indication : Donne des indications sur les règles de propagations
-![Aperçu en jeu](resources/illustrations/ingame)
+![Aperçu en jeu](resources/illustrations/ingame.png)
