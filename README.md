@@ -22,3 +22,6 @@ Une fois en jeu, il y a 3 sous-menu pour jouer au jeu :
 - Power : Survoler un pouvoir pour connaître son utilité. Appuyer dessus et sélectionner une case pour l'activer sur cette case.
 - Indication : Donne des indications sur les règles de propagations
 ![Aperçu en jeu](resources/illustrations/ingame.png)
+
+## Lancement du jeu
+Pour lancer le jeu vous pouvez suivre cette procédure [Construire un projet C++ avec cmake](https://www-inf.telecom-sudparis.eu/COURS/CSC4526/new_site/Supports/Documents/OutilsCSC4526/outilsCSC4526.html#construire-un-projet-c-avec-cmake) et séléctionner comme élément de démarrage "main.exe"
