@@ -39,4 +39,5 @@ void RandomEventManager::Update(Map* map) {
     }
     r -= mod;
   }
+  happened = true;
 }

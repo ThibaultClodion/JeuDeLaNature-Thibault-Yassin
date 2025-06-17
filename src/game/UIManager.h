@@ -23,7 +23,8 @@ private:
   void UpdateIndicationWindow();
   void ButtonStyle();
   void ResetButtonStyle();
-  
+  void DisplayEventNotification();
+
   sf::Clock deltaClock;
   sf::RectangleShape background;
 

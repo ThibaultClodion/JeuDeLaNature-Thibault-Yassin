@@ -20,8 +20,12 @@ public:
 
   void Update(Map* map); // To call each frame
 
+  bool GetHappened() {return happened;}
+  void SetHappened() {happened = false;}
+
 private:
   std::vector<std::unique_ptr<RandomEvent>> events;
+  bool happened = false;
 };
 
 
