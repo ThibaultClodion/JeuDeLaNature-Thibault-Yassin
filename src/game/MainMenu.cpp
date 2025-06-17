@@ -29,9 +29,9 @@ void MainMenu::Update(sf::RenderWindow& window, Game* game)
   {
     DisplayOptions();
   }
-  else if (situation == S_MapChoose)
+  else if (situation == S_Challenge)
   {
-    DisplayMapChoose(game);
+    DisplayChallenge(game);
   }
 
   ResetButtonStyle();
@@ -56,8 +56,8 @@ void MainMenu::DisplayMainButtons(Game* game)
   }
 
   ImGui::SetCursorPos(GetButtonPos(1));
-  if (ImGui::Button("Choose maps", ImVec2(ButtonWidth, ButtonHeight))) {
-    situation = S_MapChoose;
+  if (ImGui::Button("Challenge", ImVec2(ButtonWidth, ButtonHeight))) {
+    situation = S_Challenge;
   }
 
   ImGui::SetCursorPos(GetButtonPos(2));
@@ -139,7 +139,7 @@ void MainMenu::DisplayOptions()
   ImGui::End();
 }
 
-void MainMenu::DisplayMapChoose(Game* game)
+void MainMenu::DisplayChallenge(Game* game)
 {
   const int nbButtons = 5; // 4 buttons + text input
 
