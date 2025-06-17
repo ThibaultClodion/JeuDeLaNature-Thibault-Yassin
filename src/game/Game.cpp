@@ -22,8 +22,6 @@ Game::Game()
   context = C_MainMenu;
   mainMenu = std::make_unique<MainMenu>(window);
 
-  seedSelection = std::make_unique<SeedSelection>(mainMenu->nbNatureCell);
-
   // Initialize ImGui-SFML
   if (!ImGui::SFML::Init(window)) {
     throw std::runtime_error("Failed to initialize ImGui-SFML");
@@ -79,9 +77,6 @@ void Game::Run()
     {
       mainMenu.get()->Update(window, this);
     }
-    else if (context == C_SeedSelection) {
-      seedSelection->Update(window, this);
-    }
     ImGui::SFML::Render(window);
 
     window.display();
@@ -93,9 +88,9 @@ void Game::Run()
 void Game::Play()
 {
   context = C_Game;
-  if (seed == -1) {
+  /*if (seed == -1) {
     seed = time(nullptr);
-  }
+  }*/
   map->Initialize(true, seed);
   powerManager->Reset();
 }
@@ -111,8 +106,4 @@ void Game::End(int nbNatureCell)
 {
   context = C_MainMenu;
   mainMenu->nbNatureCell = nbNatureCell;
-}
-
-void Game::SetContext(Context context){
-  this->context = context;
 }

@@ -11,7 +11,7 @@ class SpreadLimit : public Power {
 
   void Activate(Map* map, int x, int y) override 
   {
-    __super::Activate(map, x, y);
+    Power::Activate(map, x, y);
 
     for (int i = 0; i < NB_CELL_ROW; ++i) {
       for (int j = 0; j < NB_CELL_COLUMN; ++j) {

@@ -15,7 +15,7 @@ class Earthquake : public Power {
 
   void Activate(Map* map, int x, int y) override 
   {
-    __super::Activate(map, x, y);
+    Power::Activate(map, x, y);
 
     for (int dy = -radius; dy <= radius; ++dy) {
       for (int dx = -radius; dx <= radius; ++dx) {

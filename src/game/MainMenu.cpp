@@ -33,6 +33,9 @@ void MainMenu::Update(sf::RenderWindow& window, Game* game)
   {
     DisplayChallenge(game);
   }
+  else if (situation == S_Seed) {
+    DisplaySeed(game);
+  }
 
   ResetButtonStyle();
 }
@@ -52,7 +55,7 @@ void MainMenu::DisplayMainButtons(Game* game)
 
   ImGui::SetCursorPos(GetButtonPos(0));
   if (ImGui::Button("Play", ImVec2(ButtonWidth, ButtonHeight))) {
-    game->SetContext(C_SeedSelection);
+    situation = S_Seed;
   }
 
   ImGui::SetCursorPos(GetButtonPos(1));
@@ -141,9 +144,8 @@ void MainMenu::DisplayOptions()
 
 void MainMenu::DisplayChallenge(Game* game)
 {
-  const int nbButtons = 5; // 4 buttons + text input
+  const int nbButtons = 5;
 
-  static char seedInput[32] = "";
 
   ImGui::SetNextWindowSize(GetWindowSize(nbButtons));
   ImGui::SetNextWindowPos(GetWindowPos(ImGui::GetWindowSize()));
@@ -183,19 +185,43 @@ void MainMenu::DisplayChallenge(Game* game)
     situation = S_Main;
   }
 
-  /*ImGui::SetCursorPos(GetButtonPos(4));
-  ImGui::Text("Enter custom seed (Nothing for a random seed):");
-  ImGui::SetCursorPosX(ButtonWidth / 2.f);
-  ImGui::InputText("##SeedInput", seedInput, IM_ARRAYSIZE(seedInput));
+  ImGui::End();
+}
 
-  int enteredSeed = -1;
-  if (seedInput[0] != '\0') {
-    enteredSeed = std::stoi(seedInput);
+void MainMenu::DisplaySeed(Game* game) {
+  const int nbButtons = 3;
+
+  static char seedInput[32] = "";
+
+  ImGui::SetNextWindowSize(GetWindowSize(nbButtons));
+  ImGui::SetNextWindowPos(GetWindowPos(ImGui::GetWindowSize()));
+
+  ImGui::Begin("Seed", nullptr,
+               ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize |
+                   ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse |
+                   ImGuiWindowFlags_NoScrollbar |
+                   ImGuiWindowFlags_NoBackground);
+
+  ImGui::SetCursorPos(GetButtonPos(0));
+  ImGui::Text("Enter custom seed:");
+  ImGui::SetCursorPosX(ButtonWidth / 2.f);
+  ImGui::InputText("##SeedInputMap", seedInput, IM_ARRAYSIZE(seedInput));
+
+  ImGui::SetCursorPos(GetButtonPos(1));
+  if (ImGui::Button("Start Game", ImVec2(120, 35))) {
+    situation = S_Main;
+    if (seedInput[0] != '\0') {
+      game->SetSeed(std::stoi(seedInput));
+    } else {
+      game->SetSeed(time(nullptr));
+    }
+    game->Play();
   }
 
-  if (enteredSeed != -1) {
-    game->SetSeed(enteredSeed);
-  }*/
+  ImGui::SetCursorPos(GetButtonPos(2));
+  if (ImGui::Button("Return", ImVec2(ButtonWidth, ButtonHeight))) {
+    situation = S_Main;
+  }
 
   ImGui::End();
 }

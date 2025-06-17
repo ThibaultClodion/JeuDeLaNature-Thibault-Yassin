@@ -16,7 +16,7 @@ class Wind : public Power {
 
   void Activate(Map* map, int x, int y) override 
   {
-    __super::Activate(map, x, y);
+    Power::Activate(map, x, y);
 
     static const int dx[] = {-1, 0, 1, -1, 1, -1, 0, 1};
     static const int dy[] = {-1, -1, -1, 0, 0, 1, 1, 1};

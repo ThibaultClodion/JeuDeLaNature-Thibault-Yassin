@@ -8,7 +8,7 @@
 
 class Game;
 
-enum Situation { S_Main, S_Options, S_Challenge };
+enum Situation { S_Main, S_Options, S_Challenge, S_Seed };
 
 class MainMenu 
 {
@@ -25,6 +25,7 @@ class MainMenu
   void DisplayLastGameInformation(Game* game);
   void DisplayOptions();
   void DisplayChallenge(Game* game);
+  void DisplaySeed(Game* game);
   void ButtonStyle();
   void ResetButtonStyle();
 

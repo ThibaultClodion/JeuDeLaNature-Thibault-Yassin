@@ -14,7 +14,7 @@ class Sunlight : public Power {
 
   void Activate(Map* map, int x, int y) override 
   {
-    __super::Activate(map, x, y);
+    Power::Activate(map, x, y);
 
     for (int i = 0; i < NB_CELL_COLUMN; i++)
     {

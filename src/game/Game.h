@@ -21,7 +21,6 @@ public:
   void Play(const char* filename);
   void End(int nbNatureCell);
   void Quit() { window.close(); }
-  void SetContext(Context context);
 
   int GetSeed() { return seed; };
   void SetSeed(int seed) { this->seed = seed; };
@@ -34,5 +33,4 @@ private:
   UIManager uiManager;
   std::unique_ptr<MainMenu> mainMenu;
   sf::RenderWindow window;
-  std::unique_ptr<SeedSelection> seedSelection;
 };
