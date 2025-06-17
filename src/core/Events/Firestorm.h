@@ -11,6 +11,10 @@ class Firestorm : public RandomEvent {
 public:
   Firestorm() = default;
 
+  void Trigger(Map* map) override {
+    Activate(map);
+  }
+
   void Activate(Map* map) override {
     std::cout << "Firestorm triggered\n";
 

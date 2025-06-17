@@ -19,6 +19,8 @@ class Rotten : public RandomEvent {
 public:
   Rotten() = default;
 
+  void Trigger(Map* map) override { Activate(map); }
+
   void Activate(Map* map) override {
     std::cout << "Rotten event triggered!\n";
 
