@@ -104,19 +104,6 @@ void Map::SetCell(int x, int y, std::unique_ptr<Cell> cell)
   ComputeNbNatureCell();
 }
 
-void Map::ComputeNbNatureCell() 
-{ 
-  int count = 0;
-  for (const auto& row : grid) {
-    for (const auto& cell : row) {
-      if (cell->GetType() == CT_Nature) {
-        ++count;
-      }
-    }
-  }
-  nbNatureCell = count;
-}
-
 void Map::NextGeneration() 
 {
   std::vector<std::vector<std::unique_ptr<Cell>>> newGrid(NB_CELL_ROW);

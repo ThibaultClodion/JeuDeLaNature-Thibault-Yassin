@@ -23,12 +23,14 @@ public:
   int GetRound() const { return round; }
   int GetNbNatureCell() const { return nbNatureCell; };
 
-  template<typename T>
-  int CountCellType() const {
+  
+  int CountCellType(CellType type) const {
     int count = 0;
     for (const auto& row : grid) {
-      for (const auto& cell : row) {
-        if (dynamic_cast<T*>(cell.get())) {
+      for (const auto& cell : row) 
+      {
+        if (cell.get()->GetType() == type) 
+        {
           count++;
         }
       }
@@ -39,7 +41,7 @@ public:
 
 private:
   void RandomizeGridCenter(int randomSize);
-  void ComputeNbNatureCell();
+  void ComputeNbNatureCell() { nbNatureCell = CountCellType(CT_Nature); }
 
   std::vector<std::vector<std::unique_ptr<Cell>>> grid;
   int round = 0;

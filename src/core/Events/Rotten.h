@@ -38,8 +38,8 @@ public:
   }
 
   float ComputeModifier(const Map* map) const override {
-    int nbHomes = map->CountCellType<CT_Home>();
-    int nbFields = map->CountCellType<CT_Field>();
+    int nbHomes = map->CountCellType(CT_Home);
+    int nbFields = map->CountCellType(CT_Field);
 
     if (nbFields == 0) return 0.0f; // Pas de ferme = pas de Rotten possible
 

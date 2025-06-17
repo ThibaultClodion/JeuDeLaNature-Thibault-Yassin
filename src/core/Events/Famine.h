@@ -33,8 +33,8 @@ public:
   }
 
   float ComputeModifier(const Map* map) const override {
-    int nbTowns = map->CountCellType<Home>();
-    int nbFarms = map->CountCellType<Field>();
+    int nbTowns = map->CountCellType(CT_Home);
+    int nbFarms = map->CountCellType(CT_Field);
     if (nbTowns == 0) return 0.0f;
     float ratio = static_cast<float>(nbFarms) / nbTowns;
     return (ratio < 0.5f) ? 0.8f : 0.1f; // Plus de chance si pas assez de farms
