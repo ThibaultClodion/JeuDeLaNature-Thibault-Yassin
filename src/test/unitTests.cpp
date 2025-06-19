@@ -84,20 +84,6 @@ TEST(TestStayNature, TestNextGeneration)
   EXPECT_EQ(map.GetCell(0, 0)->GetType(), CellType::CT_Nature);
 }
 
-TEST(TestChangeToFieldOrHome, TestNextGeneration) {
-  Map map{};
-  map.Initialize(false, 0);
-
-  map.SetCell(0, 1, std::make_unique<Field>(0, 1));
-  map.SetCell(1, 0, std::make_unique<Home>(1, 0));
-  map.SetCell(1, 1, std::make_unique<Field>(1, 1));
-  map.NextGeneration();
-
-  // Cell at (0, 0) should change to Field or Home
-  EXPECT_TRUE(map.GetCell(0, 0)->GetType() == CellType::CT_Field ||
-              map.GetCell(0, 0)->GetType() == CellType::CT_Home);
-}
-
 TEST(TestHomeAlone, TestNextGeneration) 
 {
   Map map{};

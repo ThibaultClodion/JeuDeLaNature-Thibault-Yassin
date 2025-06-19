@@ -17,13 +17,14 @@ public:
   void NextGeneration();
   int CountNeighbors(int x, int y, CellType Type);
 
-  // Getters and setters
-  Cell* GetCell(int x, int y) const;
-  void SetCell(int x, int y, std::unique_ptr<Cell> cell);
   int GetRound() const { return round; }
   int GetNbNatureCell() const { return nbNatureCell; };
 
   
+  // For unit test
+  Cell* GetCell(int x, int y) const;
+  void SetCell(int x, int y, std::unique_ptr<Cell> cell);
+
   int CountCellType(CellType type) const {
     int count = 0;
     for (const auto& row : grid) {
